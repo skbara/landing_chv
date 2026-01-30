@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Червяков Владислав Андреевич — Odoo / Python Developer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,7 +240,8 @@
             </a>
           </div>
           <div class="contacts__form-wrap animate-on-scroll">
-            <form class="form" id="contactForm" novalidate>
+            <!-- Чтобы получать заявки на email: зарегистрируйтесь на formspree.io и подставьте свой ID в action -->
+            <form class="form" id="contactForm" action="https://formspree.io/f/xwvbwgog" method="POST" novalidate>
               <label class="form__label">
                 <span>Имя</span>
                 <input type="text" name="name" class="form__input" required>
@@ -253,7 +255,7 @@
                 <textarea name="message" class="form__input form__textarea" rows="4" required></textarea>
               </label>
               <button type="submit" class="btn btn--primary">Отправить</button>
-              <p class="form__hint">Форма только на фронтенде — данные никуда не отправляются.</p>
+              <p class="form__hint">Заявки с формы приходят на email, указанный в настройках Formspree.</p>
             </form>
           </div>
         </div>

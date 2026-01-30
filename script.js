@@ -112,18 +112,22 @@
   window.addEventListener('scroll', setActiveNav, { passive: true });
   setActiveNav();
 
-  // Форма обратной связи — только фронтенд, без отправки
+  // Форма обратной связи: при YOUR_FORM_ID в action — демо; после подстановки ID — отправка на Formspree
   var form = document.getElementById('contactForm');
   if (form) {
+    var action = form.getAttribute('action') || '';
+    var isDemo = action.indexOf('YOUR_FORM_ID') !== -1;
     form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
-      var hint = form.querySelector('.form__hint');
-      if (btn && hint) {
-        btn.textContent = 'Отправлено (демо)';
-        btn.disabled = true;
-        hint.textContent = 'Это демо: данные никуда не отправляются. Для связи используйте Telegram, email или телефон выше.';
-        hint.style.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#2563eb';
+      if (isDemo) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var hint = form.querySelector('.form__hint');
+        if (btn && hint) {
+          btn.textContent = 'Отправлено (демо)';
+          btn.disabled = true;
+          hint.textContent = 'Это демо: подставьте ваш Formspree ID в action формы, чтобы получать заявки на email.';
+          hint.style.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#2563eb';
+        }
       }
     });
   }
