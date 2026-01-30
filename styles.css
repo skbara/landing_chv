@@ -640,6 +640,9 @@ a:hover { text-decoration: underline; }
     text-align: center;
   }
   .nav-toggle { display: flex; }
+  .hero::after {
+    clip-path: polygon(75% 0, 100% 0, 100% 22%);
+  }
   .hero__inner {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
