@@ -2,14 +2,21 @@
   'use strict';
 
   // Hamburger: открытие/закрытие мобильного меню
+  var headerEl = document.getElementById('header');
   var nav = document.getElementById('nav');
   var navToggle = document.getElementById('navToggle');
+
+  function syncMobileMenuHeader(isOpen) {
+    if (!headerEl) return;
+    headerEl.classList.toggle('header--menu-open', isOpen);
+  }
 
   if (nav && navToggle) {
     navToggle.addEventListener('click', function () {
       var isOpen = nav.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', isOpen);
       navToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+      syncMobileMenuHeader(isOpen);
     });
 
     var links = nav.querySelectorAll('a');
@@ -19,9 +26,19 @@
           nav.classList.remove('is-open');
           navToggle.setAttribute('aria-expanded', 'false');
           navToggle.setAttribute('aria-label', 'Открыть меню');
+          syncMobileMenuHeader(false);
         }
       });
     }
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Открыть меню');
+        syncMobileMenuHeader(false);
+      }
+    });
   }
 
   // Плавное появление при скролле (IntersectionObserver + --i для задержек)
@@ -30,6 +47,14 @@
   function setStaggerIndex() {
     var skillsGroups = document.querySelectorAll('.skills__group');
     skillsGroups.forEach(function (el, i) {
+      el.style.setProperty('--i', i);
+    });
+    var faqItems = document.querySelectorAll('#faq .faq-item');
+    faqItems.forEach(function (el, i) {
+      el.style.setProperty('--i', i);
+    });
+    var serviceCards = document.querySelectorAll('#services .service-card');
+    serviceCards.forEach(function (el, i) {
       el.style.setProperty('--i', i);
     });
     var timelineItems = document.querySelectorAll('.timeline__item');
@@ -65,7 +90,6 @@
   }
 
   // Header: фон на весь экран при скролле вниз от Главной
-  var headerEl = document.getElementById('header');
   var scrollThreshold = 80;
 
   function updateHeaderScroll() {
@@ -82,7 +106,7 @@
   updateHeaderScroll();
 
   // Подсветка активного раздела в навигации (линия под пунктом)
-  var sectionIds = ['hero', 'experience', 'projects', 'skills', 'trusted', 'contacts'];
+  var sectionIds = ['hero', 'services', 'experience', 'projects', 'skills', 'trusted', 'faq', 'contacts'];
 
   function setActiveNav() {
     if (!nav) return;

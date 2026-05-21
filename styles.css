@@ -69,10 +69,15 @@ a:hover { text-decoration: underline; }
   transform: translateY(0);
 }
 .section__title.animate-on-scroll.visible,
+.service-card.animate-on-scroll.visible,
 .timeline__item.animate-on-scroll.visible,
 #projects .card.animate-on-scroll.visible,
-.skills__group.animate-on-scroll.visible {
+.skills__group.animate-on-scroll.visible,
+.faq-item.animate-on-scroll.visible {
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.service-card.animate-on-scroll.visible {
+  transition-delay: calc(var(--i, 0) * 0.08s);
 }
 .timeline__item.animate-on-scroll.visible {
   transition-delay: calc(var(--i, 0) * 0.12s);
@@ -82,6 +87,9 @@ a:hover { text-decoration: underline; }
 }
 .skills__group.animate-on-scroll.visible {
   transition-delay: calc(var(--i, 0) * 0.08s);
+}
+.faq-item.animate-on-scroll.visible {
+  transition-delay: calc(var(--i, 0) * 0.06s);
 }
 .trusted__card.animate-on-scroll.visible,
 .contacts__links.animate-on-scroll.visible,
@@ -103,7 +111,8 @@ a:hover { text-decoration: underline; }
   border-bottom: none;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
-.header--scrolled {
+.header--scrolled,
+.header--menu-open {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -126,21 +135,28 @@ a:hover { text-decoration: underline; }
 }
 .logo:hover { text-decoration: none; }
 .logo-accent { color: var(--accent); }
-.header:not(.header--scrolled) .nav a {
+.header:not(.header--scrolled):not(.header--menu-open) .nav {
+  margin-left: auto;
+  transform: translateX(5.75rem);
+}
+.header:not(.header--scrolled):not(.header--menu-open) .nav a {
   color: #fff;
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s;
 }
-.header:not(.header--scrolled) .nav a:hover { color: rgba(255, 255, 255, 0.85); }
-.header:not(.header--scrolled) .nav a.is-active {
+.header:not(.header--scrolled):not(.header--menu-open) .nav a:hover { color: rgba(255, 255, 255, 0.85); }
+.header:not(.header--scrolled):not(.header--menu-open) .nav a.is-active {
   border-bottom-color: transparent;
 }
-.header--scrolled .nav a {
+.header--scrolled .nav a,
+.header--menu-open .nav a {
   color: var(--muted);
 }
-.header--scrolled .nav a:hover { color: var(--accent); }
-.header--scrolled .nav a.is-active {
+.header--scrolled .nav a:hover,
+.header--menu-open .nav a:hover { color: var(--accent); }
+.header--scrolled .nav a.is-active,
+.header--menu-open .nav a.is-active {
   color: var(--accent);
   border-bottom-color: transparent;
 }
@@ -195,8 +211,9 @@ a:hover { text-decoration: underline; }
   border-radius: 1px;
   transition: transform 0.2s, opacity 0.2s;
 }
-.header:not(.header--scrolled) .nav-toggle span { background: #fff; }
-.header--scrolled .nav-toggle span { background: var(--muted); }
+.header:not(.header--scrolled):not(.header--menu-open) .nav-toggle span { background: #fff; }
+.header--scrolled .nav-toggle span,
+.header--menu-open .nav-toggle span { background: var(--muted); }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -297,6 +314,41 @@ a:hover { text-decoration: underline; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ===== Services ===== */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.services__cta {
+  margin: 0 0 1.5rem;
+}
+.service-card {
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+.service-card:hover {
+  border-color: #d1d5db;
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.service-card__title {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.service-card__text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--muted);
 }
 
 @keyframes fadeUp {
@@ -681,6 +733,64 @@ a:hover { text-decoration: underline; }
 }
 .trusted__desc { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
+/* ===== FAQ ===== */
+.faq {
+  display: grid;
+  gap: 1rem;
+}
+.faq-item {
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.faq-item[open] {
+  border-color: #d1d5db;
+  box-shadow: var(--shadow-hover);
+}
+.faq-item__question {
+  position: relative;
+  display: block;
+  padding: 1.1rem 3.25rem 1.1rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+.faq-item__question::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 1.15rem;
+  transform: translateY(-50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.faq-item[open] .faq-item__question::after {
+  content: "−";
+}
+.faq-item__answer {
+  margin: 0;
+  padding: 0 1.25rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
 /* ===== Contacts (акцент: подписи, полоска у ссылок, кнопка) ===== */
 .section--contacts .section__title { margin-bottom: 1.5rem; }
 .contacts {
@@ -750,6 +860,7 @@ a:hover { text-decoration: underline; }
 
 /* ===== Responsive: tablet 768–1023 ===== */
 @media (max-width: 1023px) {
+  .services { grid-template-columns: repeat(2, 1fr); }
   .projects { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -764,6 +875,7 @@ a:hover { text-decoration: underline; }
     order: 3;
     width: 100%;
     flex-direction: column;
+    transform: none;
     padding: 1rem 0;
     gap: 0.5rem;
     border-top: 1px solid rgba(0,0,0,0.06);
@@ -793,6 +905,7 @@ a:hover { text-decoration: underline; }
   .hero__intro { margin-left: auto; margin-right: auto; }
   .hero__cta { justify-content: center; }
   .hero__photo { justify-self: center; }
+  .services { grid-template-columns: 1fr; }
   .projects { grid-template-columns: 1fr; }
   .lightbox__dialog {
     width: calc(100vw - 1rem);
