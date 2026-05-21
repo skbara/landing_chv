@@ -120,6 +120,7 @@
   var lightboxDialog = lightbox ? lightbox.querySelector('.lightbox__dialog') : null;
   var lightboxTriggers = document.querySelectorAll('.card__shot-button');
   var lastLightboxTrigger = null;
+  var lastLightboxOpenAt = 0;
 
   function syncLightboxLayout() {
     if (!lightboxDialog || !lightboxImage) return;
@@ -182,6 +183,17 @@
     }
   }
 
+  function openLightboxOnce(trigger) {
+    var now = Date.now();
+
+    if (now - lastLightboxOpenAt < 350) {
+      return;
+    }
+
+    lastLightboxOpenAt = now;
+    openLightbox(trigger);
+  }
+
   if (lightbox && lightboxTriggers.length) {
     if (lightboxImage) {
       lightboxImage.addEventListener('load', syncLightboxLayout);
@@ -189,9 +201,19 @@
     }
 
     lightboxTriggers.forEach(function (trigger) {
-      trigger.addEventListener('click', function () {
-        openLightbox(trigger);
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        openLightboxOnce(trigger);
       });
+
+      trigger.addEventListener(
+        'touchend',
+        function (e) {
+          e.preventDefault();
+          openLightboxOnce(trigger);
+        },
+        { passive: false }
+      );
     });
 
     if (lightboxClose) {

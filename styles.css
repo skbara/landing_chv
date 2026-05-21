@@ -483,11 +483,15 @@ a:hover { text-decoration: underline; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
+  align-items: start;
 }
 .card__gallery--single {
   grid-template-columns: 1fr;
 }
 .card__shot {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   border: 1px solid #e5e7eb;
@@ -499,8 +503,14 @@ a:hover { text-decoration: underline; }
   width: 100%;
   padding: 0;
   border: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: inherit;
   background: transparent;
   cursor: zoom-in;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 .card__shot-button:focus-visible {
   outline: 2px solid var(--accent);
@@ -509,8 +519,10 @@ a:hover { text-decoration: underline; }
 .card__shot img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  aspect-ratio: auto;
   object-fit: cover;
+  object-position: center top;
   background: #f3f4f6;
   transition: transform 0.2s ease;
 }
@@ -739,7 +751,6 @@ a:hover { text-decoration: underline; }
 /* ===== Responsive: tablet 768–1023 ===== */
 @media (max-width: 1023px) {
   .projects { grid-template-columns: repeat(2, 1fr); }
-  .card__gallery { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -827,6 +838,20 @@ a:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .container, .container--wide { padding: 0 1.25rem; }
+  .card__gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .card__shot figcaption {
+    padding: 0.55rem 0.65rem 0.7rem;
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .card__gallery {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== Reduce motion ===== */
