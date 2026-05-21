@@ -112,6 +112,104 @@
   window.addEventListener('scroll', setActiveNav, { passive: true });
   setActiveNav();
 
+  // Lightbox для скриншотов кейсов
+  var lightbox = document.getElementById('imageLightbox');
+  var lightboxImage = document.getElementById('lightboxImage');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+  var lightboxDialog = lightbox ? lightbox.querySelector('.lightbox__dialog') : null;
+  var lightboxTriggers = document.querySelectorAll('.card__shot-button');
+  var lastLightboxTrigger = null;
+
+  function syncLightboxLayout() {
+    if (!lightboxDialog || !lightboxImage) return;
+
+    lightboxDialog.classList.remove(
+      'lightbox__dialog--landscape',
+      'lightbox__dialog--portrait'
+    );
+
+    if (!lightboxImage.naturalWidth || !lightboxImage.naturalHeight) return;
+
+    if (lightboxImage.naturalWidth / lightboxImage.naturalHeight > 1.35) {
+      lightboxDialog.classList.add('lightbox__dialog--landscape');
+    } else if (lightboxImage.naturalHeight / lightboxImage.naturalWidth > 1.15) {
+      lightboxDialog.classList.add('lightbox__dialog--portrait');
+    }
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+    if (lightboxImage) {
+      lightboxImage.setAttribute('src', '');
+      lightboxImage.setAttribute('alt', '');
+    }
+    if (lightboxCaption) {
+      lightboxCaption.textContent = '';
+    }
+    if (lightboxDialog) {
+      lightboxDialog.classList.remove(
+        'lightbox__dialog--landscape',
+        'lightbox__dialog--portrait'
+      );
+    }
+    if (lastLightboxTrigger) {
+      lastLightboxTrigger.focus();
+    }
+  }
+
+  function openLightbox(trigger) {
+    if (!lightbox || !lightboxImage || !lightboxCaption || !trigger) return;
+
+    var src = trigger.getAttribute('data-lightbox-src') || '';
+    var alt = trigger.getAttribute('data-lightbox-alt') || '';
+    var caption = trigger.getAttribute('data-lightbox-caption') || '';
+
+    if (!src) return;
+
+    lastLightboxTrigger = trigger;
+    lightboxImage.setAttribute('src', src);
+    lightboxImage.setAttribute('alt', alt);
+    lightboxCaption.textContent = caption;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    syncLightboxLayout();
+
+    if (lightboxClose) {
+      lightboxClose.focus();
+    }
+  }
+
+  if (lightbox && lightboxTriggers.length) {
+    if (lightboxImage) {
+      lightboxImage.addEventListener('load', syncLightboxLayout);
+      window.addEventListener('resize', syncLightboxLayout);
+    }
+
+    lightboxTriggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        openLightbox(trigger);
+      });
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    var lightboxDismiss = lightbox.querySelectorAll('[data-lightbox-close]');
+    lightboxDismiss.forEach(function (el) {
+      el.addEventListener('click', closeLightbox);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  }
+
   // Форма обратной связи: при YOUR_FORM_ID в action — демо; после подстановки ID — отправка на Formspree
   var form = document.getElementById('contactForm');
   if (form) {
