@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кейс: Buildflow ERP на Odoo 17 | Реестры смет, договоров и актов</title>
+  <meta name="description" content="MVP ERP для инженера-сметчика на Odoo 17 Community: Docker, кастомные реестры, роли, dashboard, DMS OCA. Переход с Google Таблиц на единую систему.">
+  <link rel="canonical" href="https://www.vch-tech.com/cases/buildflow.html">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ВЧ — Odoo Developer">
+  <meta property="og:title" content="Кейс: Buildflow ERP на Odoo 17">
+  <meta property="og:description" content="MVP ERP для инженера-сметчика: реестры смет, договоров и актов, роли, dashboard, DMS. Odoo 17 Community без правок core.">
+  <meta property="og:url" content="https://www.vch-tech.com/cases/buildflow.html">
+  <meta property="og:image" content="https://www.vch-tech.com/images/og-cover.png">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Buildflow ERP на Odoo 17 — MVP для инженера-сметчика",
+      "description": "MVP ERP на Odoo 17 Community: реестры смет, договоров и актов, роли, dashboard, DMS OCA.",
+      "url": "https://www.vch-tech.com/cases/buildflow.html",
+      "inLanguage": "ru-RU",
+      "author": {
+        "@type": "Person",
+        "name": "Червяков Владислав Андреевич",
+        "url": "https://www.vch-tech.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ВЧ — Odoo Developer",
+        "url": "https://www.vch-tech.com/"
+      },
+      "about": ["Odoo", "Odoo 17", "ERP", "строительные реестры"]
+    }
+  </script>
+</head>
+<body class="case-page">
+  <header class="header header--scrolled" id="header">
+    <div class="header__inner">
+      <a href="../index.html" class="logo">В<span class="logo-accent">Ч</span></a>
+      <nav class="nav nav--case" id="nav">
+        <a href="../index.html">Главная</a>
+        <a href="../index.html#projects-cases">Проекты</a>
+        <a href="../index.html#contacts">Контакты</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <header class="case-hero">
+      <div class="case-hero__inner">
+        <nav class="case-breadcrumb" aria-label="Навигация">
+          <a href="../index.html">Главная</a>
+          <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="../index.html#projects-cases">Проекты</a>
+          <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
+          <span>Buildflow</span>
+        </nav>
+        <p class="case-hero__label">Кейс • Odoo 17 Community • MVP</p>
+        <h1 class="case-hero__title">Buildflow ERP для инженера-сметчика</h1>
+        <p class="case-hero__lead">
+          Проектирование и запуск MVP на Odoo 17: от Docker-инфраструктуры до реестров смет, договоров и актов.
+          Ключевая операционная логика перенесена из Google Таблиц в единую ERP без правок core Odoo.
+        </p>
+        <ul class="case-hero__meta">
+          <li><strong>Роль:</strong> архитектор, backend, DevOps</li>
+          <li><strong>Период:</strong> декабрь 2025 — н.в.</li>
+          <li><strong>Отрасль:</strong> строительство, сметы, подрядчики</li>
+        </ul>
+        <div class="case-hero__actions">
+          <a href="../index.html#contacts" class="btn btn--primary">Обсудить похожий проект</a>
+          <a href="../index.html#projects" class="btn btn--outline">Все проекты</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <ul class="case-tags">
+          <li>Odoo 17</li>
+          <li>Odoo Community</li>
+          <li>Docker</li>
+          <li>Кастомные модули</li>
+          <li>Record rules</li>
+          <li>spreadsheet_dashboard</li>
+          <li>DMS OCA</li>
+        </ul>
+
+        <ul class="case-stats animate-on-scroll">
+          <li class="case-stats__item">
+            <span class="case-stats__value">MVP</span>
+            <p class="case-stats__label">Этап 1 завершён: реестры и роли в продакшене</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">0</span>
+            <p class="case-stats__label">Правок core Odoo — только кастомные модули</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">3+</span>
+            <p class="case-stats__label">Связанных реестра: сметы, договоры, акты</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">→ Odoo</span>
+            <p class="case-stats__label">Отказ от Google Таблиц как основного инструмента</p>
+          </li>
+        </ul>
+
+        <div class="case-body animate-on-scroll">
+          <h2>Задача</h2>
+          <p>
+            Инженер-сметчик работает с несколькими строительными компаниями и застройщиками. Данные по сметам,
+            договорам и актам жили в разрозненных Google Таблицах: сложно искать связи, контролировать статусы
+            и делиться документами между ролями. Нужна была единая ERP на open-source стеке с возможностью
+            масштабирования без vendor lock-in.
+          </p>
+
+          <h2>Решение</h2>
+          <p>
+            С нуля развернута инфраструктура Odoo в Docker, спроектирована архитектура данных под строительные
+            реестры и реализованы кастомные модули: центральный реестр смет с иерархией родитель / доп. соглашения,
+            связанные реестры договоров и актов, справочники, области видимости пользователей и backend UX под роли
+            (администратор, подрядчики с доступом только к своим данным).
+          </p>
+          <ul>
+            <li><strong>Роли и безопасность:</strong> record rules на уровне моделей, полей и UI.</li>
+            <li><strong>Документы:</strong> интеграция DMS OCA — файлы к сметам, договорам и актам из реестров.</li>
+            <li><strong>Аналитика:</strong> dashboard на <code>spreadsheet_dashboard</code> с фильтрами и динамическими таблицами под области видимости.</li>
+            <li><strong>Доступ:</strong> контроль веб-сессий, Telegram-whitelist и права для бота.</li>
+            <li><strong>Миграции и UX:</strong> перенос логики из таблиц — фильтры, статусы, переходы в карточки записей.</li>
+          </ul>
+
+          <h2>Результат этапа 1</h2>
+          <ul>
+            <li>Централизованы данные по сметам, договорам и актам в одной системе.</li>
+            <li>Снижен объём ручных операций и дублирования между таблицами.</li>
+            <li>Заложена база для интеграций с застройщиками, Telegram-бота и расширения на склад и бюджетирование.</li>
+            <li>После MVP проект переведён на техническую поддержку; следующий этап — масштабирование.</li>
+          </ul>
+
+          <h2>Скриншоты</h2>
+          <p>Фрагменты интерфейса реестров и дашборда (клик — увеличение).</p>
+        </div>
+
+        <div class="case-gallery" aria-label="Скриншоты Buildflow">
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр смет - 1 (реестр).png" data-lightbox-alt="Buildflow: реестр смет" data-lightbox-caption="Реестр смет" aria-label="Открыть: реестр смет">
+              <img src="../photo/Реестр смет - 1 (реестр).png" alt="Buildflow: реестр смет" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Реестр смет</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр смет - 2 (раздел динамических фильтров).png" data-lightbox-alt="Buildflow: динамические фильтры" data-lightbox-caption="Динамические фильтры" aria-label="Открыть: динамические фильтры">
+              <img src="../photo/Реестр смет - 2 (раздел динамических фильтров).png" alt="Buildflow: динамические фильтры в реестре смет" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Динамические фильтры</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр смет - 3 (карточка сметы).png" data-lightbox-alt="Buildflow: карточка сметы" data-lightbox-caption="Карточка сметы" aria-label="Открыть: карточка сметы">
+              <img src="../photo/Реестр смет - 3 (карточка сметы).png" alt="Buildflow: карточка сметы" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Карточка сметы</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр актов - 1 (реестр).png" data-lightbox-alt="Buildflow: реестр актов" data-lightbox-caption="Реестр актов" aria-label="Открыть: реестр актов">
+              <img src="../photo/Реестр актов - 1 (реестр).png" alt="Buildflow: реестр актов" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Реестр актов</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр актов - 2 (карточка акта).png" data-lightbox-alt="Buildflow: карточка акта" data-lightbox-caption="Карточка акта" aria-label="Открыть: карточка акта">
+              <img src="../photo/Реестр актов - 2 (карточка акта).png" alt="Buildflow: карточка акта" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Карточка акта</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр договоров - 1 (реестр).png" data-lightbox-alt="Buildflow: реестр договоров" data-lightbox-caption="Реестр договоров" aria-label="Открыть: реестр договоров">
+              <img src="../photo/Реестр договоров - 1 (реестр).png" alt="Buildflow: реестр договоров" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Реестр договоров</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Реестр договоров - 2 (карточка договора).png" data-lightbox-alt="Buildflow: карточка договора" data-lightbox-caption="Карточка договора" aria-label="Открыть: карточка договора">
+              <img src="../photo/Реестр договоров - 2 (карточка договора).png" alt="Buildflow: карточка договора" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Карточка договора</figcaption>
+          </figure>
+          <figure class="card__shot animate-on-scroll">
+            <button type="button" class="card__shot-button" data-lightbox-src="../photo/Дашборд.png" data-lightbox-alt="Buildflow: дашборд реестров" data-lightbox-caption="Дашборд по ключевым показателям реестров" aria-label="Открыть: дашборд">
+              <img src="../photo/Дашборд.png" alt="Buildflow: дашборд реестров" loading="lazy" width="1024" height="576">
+            </button>
+            <figcaption>Дашборд</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-cta animate-on-scroll">
+          <h2 class="case-cta__title">Нужен MVP на Odoo под ваши реестры?</h2>
+          <p class="case-cta__text">Разберём процессы, спроектируем модули и запустим рабочую версию без правок ядра Odoo.</p>
+          <a href="../index.html#contacts" class="btn btn--primary">Связаться</a>
+        </div>
+
+        <div class="case-related animate-on-scroll">
+          <p class="case-related__title">Другой кейс</p>
+          <a href="sync-odoo.html" class="case-related__link">Двусторонняя синхронизация между Odoo-инстансами →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="imageLightbox" hidden>
+    <div class="lightbox__backdrop" data-lightbox-close></div>
+    <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption">
+      <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Закрыть окно">×</button>
+      <img class="lightbox__image" id="lightboxImage" src="" alt="">
+      <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><a href="../index.html">Червяков Владислав</a> • Odoo / Python Developer</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -106,7 +106,7 @@
   updateHeaderScroll();
 
   // Подсветка активного раздела в навигации (линия под пунктом)
-  var sectionIds = ['hero', 'services', 'experience', 'projects', 'skills', 'trusted', 'faq', 'contacts'];
+  var sectionIds = ['hero', 'services', 'experience', 'projects-cases', 'skills', 'trusted', 'faq', 'contacts'];
 
   function setActiveNav() {
     if (!nav) return;

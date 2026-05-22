@@ -1,0 +1,70 @@
+# ВЧ — Odoo Developer (Червяков Владислав)
+
+> Odoo / Python разработчик в России. Кастомные модули, интеграции, MVP, техподдержка и масштабирование ERP на Odoo Community. Основной фокус: Odoo 17/18/19, Python, ERP/WMS, строительные и операционные реестры.
+
+## Canonical
+
+- Website: https://www.vch-tech.com/
+- Extended profile (plain text): https://www.vch-tech.com/about.txt
+- Sitemap: https://www.vch-tech.com/sitemap.xml
+
+## Case studies
+
+- Buildflow ERP (Odoo 17 MVP): https://www.vch-tech.com/cases/buildflow.html
+- Odoo instance sync / integrations: https://www.vch-tech.com/cases/sync-odoo.html
+
+## Person
+
+- Name: Червяков Владислав Андреевич
+- Role: Odoo / Python Developer
+- Location: Russia (remote-friendly)
+- Languages: Russian (native), English (working)
+
+## Summary
+
+Архитектура и разработка модулей Odoo без правок core, интеграции между системами и Odoo-инстансами, поддержка продакшена. Подключение как разработчик и архитектор: аудит, MVP, перевод процессов из Excel/Google Таблиц, сопровождение после релиза.
+
+## Services
+
+- Аудит и проектирование Odoo-решения
+- Разработка кастомных модулей Odoo (модели, views, record rules, импорты, cron, backend UX)
+- Интеграции Odoo с CRM, ERP, API, документооборотом, Telegram
+- MVP на Odoo Community и миграция с таблиц
+- Техническая поддержка и развитие после запуска
+- Масштабирование после MVP
+
+## Expertise (keywords)
+
+Odoo, Odoo 17, Odoo 18, Odoo 19, Odoo Community, Python, кастомные модули Odoo, интеграции Odoo, ERP, WMS, Docker, REST API, spreadsheet_dashboard, DMS OCA, Excel/CSV import, двусторонняя синхронизация Odoo
+
+## Selected results
+
+- Buildflow ERP MVP (Odoo 17): реестры смет, договоров, актов; роли и record rules; dashboard; DMS OCA; отказ от Google Таблиц как основного инструмента
+- Двусторонняя синхронизация Odoo: ~100 заказов/закупок, ~200 отгрузок, ~500 сообщений и вложений в день; инциденты с 15 до 3–4 в неделю
+- Импорт Excel/CSV: заказы 100–200 позиций с 1–2 часов до ~5 минут
+- Первая линия поддержки интеграций: ~300 тикетов, реакция до 5 минут
+
+## FAQ (short)
+
+- Versions: Odoo 17/18/19 primarily; other versions possible by project state
+- MVP / Excel start: yes, typical scenario
+- Post-launch support and scale-up after MVP: yes
+- Integrations: yes, with focus on resilience and error recovery
+- Partial engagement / join existing team: yes
+- No hard vendor lock-in if built via custom modules without core patches
+
+## Contact
+
+- Telegram: https://t.me/skbarawork (@skbarawork) — preferred
+- Email: skbarawork@gmail.com
+- Phone: +7-995-966-33-19
+
+## Same as
+
+- GitHub: https://github.com/skbara
+- LinkedIn: https://www.linkedin.com/in/vladislav-chervyakov-a26a5839a/
+
+## Team (optional capacity)
+
+- Бобров Семен — Odoo, support after development phases
+- Червяков Александр — Bitrix24 CRM, telephony/social integrations, web

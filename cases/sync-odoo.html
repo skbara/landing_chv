@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кейс: двусторонняя синхронизация Odoo | Интеграции заказов, отгрузок, стоков</title>
+  <meta name="description" content="Интеграция двух Odoo-инстансов: заказы, закупки, отгрузки, сообщения и вложения. Снижение инцидентов с 15 до 3–4 в неделю, устойчивость и восстановление после ошибок.">
+  <link rel="canonical" href="https://www.vch-tech.com/cases/sync-odoo.html">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ВЧ — Odoo Developer">
+  <meta property="og:title" content="Кейс: синхронизация между Odoo-инстансами">
+  <meta property="og:description" content="Двусторонний обмен заказами, отгрузками, стоками и сообщениями между Odoo. Очереди, обработка ошибок, поддержка продакшена.">
+  <meta property="og:url" content="https://www.vch-tech.com/cases/sync-odoo.html">
+  <meta property="og:image" content="https://www.vch-tech.com/images/og-cover.png">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Двусторонняя синхронизация между Odoo-инстансами",
+      "description": "Интеграционный контур Odoo: заказы, отгрузки, стоки, сообщения. Снижение инцидентов и первая линия поддержки.",
+      "url": "https://www.vch-tech.com/cases/sync-odoo.html",
+      "inLanguage": "ru-RU",
+      "author": {
+        "@type": "Person",
+        "name": "Червяков Владислав Андреевич",
+        "url": "https://www.vch-tech.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ВЧ — Odoo Developer",
+        "url": "https://www.vch-tech.com/"
+      },
+      "about": ["Odoo", "интеграции Odoo", "REST API", "ERP", "WMS"]
+    }
+  </script>
+</head>
+<body class="case-page">
+  <header class="header header--scrolled" id="header">
+    <div class="header__inner">
+      <a href="../index.html" class="logo">В<span class="logo-accent">Ч</span></a>
+      <nav class="nav nav--case" id="nav">
+        <a href="../index.html">Главная</a>
+        <a href="../index.html#projects-cases">Проекты</a>
+        <a href="../index.html#contacts">Контакты</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <header class="case-hero">
+      <div class="case-hero__inner">
+        <nav class="case-breadcrumb" aria-label="Навигация">
+          <a href="../index.html">Главная</a>
+          <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
+          <a href="../index.html#projects-cases">Проекты</a>
+          <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
+          <span>Синхронизация Odoo</span>
+        </nav>
+        <p class="case-hero__label">Кейс • Интеграции • Продакшен</p>
+        <h1 class="case-hero__title">Двусторонняя синхронизация между Odoo-инстансами</h1>
+        <p class="case-hero__lead">
+          Проектирование и развитие интеграционного контура между двумя Odoo: заказы, закупки, отгрузки,
+          остатки, сообщения и вложения. Упор на устойчивость обмена, прозрачную логику и быстрое
+          восстановление после сбоев.
+        </p>
+        <ul class="case-hero__meta">
+          <li><strong>Роль:</strong> Odoo Middle / Python Developer, архитектура синхронизации</li>
+          <li><strong>Период:</strong> май 2024 — декабрь 2025</li>
+          <li><strong>Контекст:</strong> коммерческий проект, kt.team</li>
+        </ul>
+        <div class="case-hero__actions">
+          <a href="../index.html#contacts" class="btn btn--primary">Обсудить интеграцию</a>
+          <a href="../index.html#projects" class="btn btn--outline">Все проекты</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section section--alt">
+      <div class="container">
+        <ul class="case-tags">
+          <li>Odoo</li>
+          <li>REST API</li>
+          <li>RPC</li>
+          <li>Интеграции</li>
+          <li>WMS</li>
+          <li>Очереди</li>
+          <li>Поддержка продакшена</li>
+        </ul>
+
+        <ul class="case-stats animate-on-scroll">
+          <li class="case-stats__item">
+            <span class="case-stats__value">~100</span>
+            <p class="case-stats__label">Заказов и закупок в обмене ежедневно</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">~200</span>
+            <p class="case-stats__label">Отгрузок в обмене ежедневно</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">~500</span>
+            <p class="case-stats__label">Сообщений и вложений в обмене ежедневно</p>
+          </li>
+          <li class="case-stats__item">
+            <span class="case-stats__value">15 → 3–4</span>
+            <p class="case-stats__label">Инцидентов в неделю после оптимизации</p>
+          </li>
+        </ul>
+
+        <div class="case-body animate-on-scroll">
+          <h2>Задача</h2>
+          <p>
+            Два Odoo-инстанса должны обмениваться операционными данными в режиме, близком к реальному времени:
+            продажи, закупки, склад, переписка по документам. При сбоях — риск расхождения остатков, «зависших»
+            заказов и нагрузки на службу поддержки. Отдельных ролей BA/QA в команде не было — требовались
+            проектирование, разработка, тестирование и сопровождение одним контуром.
+          </p>
+
+          <h2>Что сделано</h2>
+          <ul>
+            <li><strong>Архитектура синхронизации:</strong> структура обмена, стандарты модулей, границы ответственности между инстансами.</li>
+            <li><strong>Объекты обмена:</strong> <code>sale.order</code>, <code>purchase.order</code>, <code>stock.picking</code>, остатки, сообщения, вложения.</li>
+            <li><strong>Импорт Excel/CSV:</strong> универсальные модули для заказов, отгрузок и закупок (до 500 строк) — крупные заказы с 1–2 часов до ~5 минут.</li>
+            <li><strong>Бизнес-логика:</strong> перерасчёт остатков, доставка, уведомления, cron-задачи.</li>
+            <li><strong>Устойчивость:</strong> оптимизация очередей, обработка ошибок, автоматическое восстановление после сбоев.</li>
+            <li><strong>Остатки:</strong> прозрачный расчёт стоков — клиентская служба перестала вручную уточнять количества на складе.</li>
+          </ul>
+
+          <h2>Поддержка и команда</h2>
+          <p>
+            Назначен ответственным за первую линию поддержки интеграционного контура: до 30 обращений в неделю,
+            время первой реакции до 5 минут, восстановление в течение дня. За период работы закрыто около 300 тикетов,
+            подготовлен документ с типовыми инцидентами и инструкциями — снижена доля повторяющихся сбоев.
+          </p>
+          <p>
+            Параллельно — распределение задач между тремя разработчиками, стандарты кода и проектирование
+            решений при совмещении ролей разработчика, аналитика и тестировщика.
+          </p>
+
+          <h2>Результат</h2>
+          <ul>
+            <li>Стабильный ежедневный обмен с предсказуемой логикой и восстановлением после ошибок.</li>
+            <li>Существенное снижение числа инцидентов на интеграционном контуре.</li>
+            <li>Ускорение операционных сценариев (импорт, остатки) и снижение нагрузки на поддержку.</li>
+            <li>Документированные типовые сбои для передачи знаний внутри команды.</li>
+          </ul>
+
+          <h2>Технологии и подход</h2>
+          <p>
+            Кастомные модули Odoo, Python, REST/RPC, Docker/K8s в существующих пайплайнах, работа с логами
+            и продакшен-инцидентами. Все доработки — без правок core Odoo, чтобы интеграцию можно было
+            развивать и сопровождать независимо от одного исполнителя.
+          </p>
+        </div>
+
+        <div class="case-cta animate-on-scroll">
+          <h2 class="case-cta__title">Нужна интеграция Odoo с другой системой?</h2>
+          <p class="case-cta__text">Спроектируем обмен, закроем сценарии ошибок и подключимся к поддержке после запуска.</p>
+          <a href="../index.html#contacts" class="btn btn--primary">Связаться</a>
+        </div>
+
+        <div class="case-related animate-on-scroll">
+          <p class="case-related__title">Другой кейс</p>
+          <a href="buildflow.html" class="case-related__link">Buildflow ERP на Odoo 17 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><a href="../index.html">Червяков Владислав</a> • Odoo / Python Developer</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

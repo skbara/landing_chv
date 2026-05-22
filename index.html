@@ -6,6 +6,8 @@
   <title>Odoo разработчик в России | Odoo 17/18, Python, кастомные модули и интеграции</title>
   <meta name="description" content="Разработка и сопровождение Odoo-проектов: кастомные модули, Odoo Community, интеграции, техподдержка и масштабирование ERP-решений. Кейсы, интерфейсы и опыт работы.">
   <link rel="canonical" href="https://www.vch-tech.com/">
+  <link rel="alternate" type="text/plain" href="https://www.vch-tech.com/about.txt" title="О профиле (plain text)">
+  <link rel="alternate" type="text/plain" href="https://www.vch-tech.com/llms.txt" title="LLM summary">
   <meta name="google-site-verification" content="MGjjLo-KbzIulCB1tJL-4A7HhVYuEFh_dC_V2mUest8">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:locale" content="ru_RU">
@@ -230,7 +232,7 @@
         <a href="#hero">Главная</a>
         <a href="#services">Услуги</a>
         <a href="#experience">Опыт</a>
-        <a href="#projects">Проекты</a>
+        <a href="#projects-cases">Проекты</a>
         <a href="#skills">Навыки</a>
         <a href="#trusted">Команда</a>
         <a href="#faq">FAQ</a>
@@ -263,7 +265,7 @@
           </p>
           <div class="hero__cta">
             <a href="#contacts" class="btn btn--primary">Связаться</a>
-            <a href="#projects" class="btn btn--outline">Проекты</a>
+            <a href="#projects-cases" class="btn btn--outline">Проекты</a>
           </div>
         </div>
         <div class="hero__photo">
@@ -364,6 +366,21 @@
         <p class="section__subtitle animate-on-scroll">Service</p>
         <h2 class="section__title animate-on-scroll">Ключевые проекты</h2>
         <div class="section__line" aria-hidden="true"></div>
+        <nav class="projects-cases animate-on-scroll" id="projects-cases" aria-label="Подробные кейсы">
+          <p class="projects-cases__label">Подробные кейсы</p>
+          <div class="projects-cases__grid">
+            <a href="cases/buildflow.html" class="projects-cases__card">
+              <span class="projects-cases__card-title">Buildflow ERP на Odoo 17</span>
+              <span class="projects-cases__card-desc">MVP для инженера-сметчика: реестры, роли, dashboard, переход с Google Таблиц.</span>
+              <span class="projects-cases__card-arrow">Читать кейс →</span>
+            </a>
+            <a href="cases/sync-odoo.html" class="projects-cases__card">
+              <span class="projects-cases__card-title">Синхронизация между Odoo</span>
+              <span class="projects-cases__card-desc">Двусторонний обмен заказами, отгрузками и сообщениями, снижение инцидентов.</span>
+              <span class="projects-cases__card-arrow">Читать кейс →</span>
+            </a>
+          </div>
+        </nav>
         <div class="projects">
           <article class="card card--featured animate-on-scroll">
             <h3 class="card__title">Реестр смет и справочники Buildflow</h3>
@@ -389,9 +406,10 @@
                 <figcaption>Карточка сметы</figcaption>
               </figure>
             </div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе Buildflow →</a>
           </article>
           <article class="card animate-on-scroll">
-            <h3 class="card__title">Реестры договоров и актов</h3>
+            <h3 class="card__title">Реестры договоров и актов Buildflow</h3>
             <p class="card__text">Связанные реестры договоров и актов с финансовыми показателями, типами документов, статусами подписания и оплаты, комплектностью и расширением карточки сметы. Согласованная модель связей между сметой, договором и актом без правок core Odoo.</p>
             <div class="card__tags"><span>Odoo</span><span>Contracts</span><span>Acts</span></div>
             <div class="card__gallery" aria-label="Скриншоты реестров договоров и актов Buildflow">
@@ -420,6 +438,7 @@
                 <figcaption>Карточка договора</figcaption>
               </figure>
             </div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе Buildflow →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Дашборд реестров Buildflow</h3>
@@ -433,26 +452,31 @@
                 <figcaption>Дашборд по ключевым показателям реестров</figcaption>
               </figure>
             </div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе Buildflow →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Buildflow ERP для инженера-сметчика</h3>
             <p class="card__text">MVP на Odoo 17 Community: Docker-инфраструктура, архитектура кастомных модулей, реестры смет/договоров/актов, роли и области видимости. Централизация данных, отказ от Google Таблиц как основного инструмента и база для дальнейшего масштабирования.</p>
             <div class="card__tags"><span>Odoo</span><span>Docker</span><span>MVP</span></div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Контроль веб-сессий и Telegram-доступов</h3>
             <p class="card__text">Модуль ограничения одновременных веб-сессий и отдельная доработка доступа через Telegram: whitelist, logout/redirect при конфликте сессий, поля Telegram ID и права для бота. Закрыта операционная проблема неконтролируемого доступа и смежных сценариев работы пользователей.</p>
             <div class="card__tags"><span>Odoo</span><span>Security</span><span>Telegram</span></div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе Buildflow →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Интеграция с DMS OCA</h3>
             <p class="card__text">Подключение Document Management System из OCA к кастомным модулям Buildflow: централизованное хранение, прикрепление файлов к сметам, договорам и актам, быстрый доступ к документам прямо из реестров.</p>
             <div class="card__tags"><span>Odoo</span><span>DMS</span><span>OCA</span></div>
+            <a href="cases/buildflow.html" class="card__link-more">Подробнее о кейсе Buildflow →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Двусторонняя синхронизация Odoo</h3>
             <p class="card__text">Ежедневно: ≈100 заказов и закупок, ≈200 отгрузок, ≈500 сообщений и вложений. Устойчивость и автоматическое восстановление после ошибок. Инциденты снижены с 15 до 3–4 в неделю.</p>
             <div class="card__tags"><span>Odoo</span><span>REST</span><span>Интеграции</span></div>
+            <a href="cases/sync-odoo.html" class="card__link-more">Подробнее о кейсе →</a>
           </article>
           <article class="card animate-on-scroll">
             <h3 class="card__title">Импорт строк заказа из Excel/CSV в Odoo</h3>
