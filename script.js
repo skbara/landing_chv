@@ -1,6 +1,113 @@
 (function () {
   'use strict';
 
+  var COOKIE_CONSENT_KEY = 'vch_cookie_consent';
+  var YM_ID = 107146057;
+
+  function getCookieConsent() {
+    try {
+      return localStorage.getItem(COOKIE_CONSENT_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setCookieConsent(value) {
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, value);
+    } catch (e) {
+      /* localStorage недоступен */
+    }
+  }
+
+  function loadYandexMetrika() {
+    if (window.__vchYmLoaded) {
+      return;
+    }
+    window.__vchYmLoaded = true;
+
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + YM_ID, 'ym');
+
+    window.ym(YM_ID, 'init', {
+      ssr: true,
+      webvisor: true,
+      clickmap: true,
+      ecommerce: 'dataLayer',
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  }
+
+  function hideCookieBanner(banner) {
+    if (!banner) {
+      return;
+    }
+    banner.hidden = true;
+    document.body.classList.remove('cookie-banner-visible');
+  }
+
+  function showCookieBanner(banner) {
+    if (!banner) {
+      return;
+    }
+    banner.hidden = false;
+    document.body.classList.add('cookie-banner-visible');
+  }
+
+  function initCookieConsent() {
+    var banner = document.getElementById('cookieBanner');
+    var acceptBtn = document.getElementById('cookieAccept');
+    var essentialBtn = document.getElementById('cookieEssential');
+    var consent = getCookieConsent();
+
+    if (consent === 'all') {
+      loadYandexMetrika();
+      hideCookieBanner(banner);
+      return;
+    }
+
+    if (consent === 'essential') {
+      hideCookieBanner(banner);
+      return;
+    }
+
+    showCookieBanner(banner);
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function () {
+        setCookieConsent('all');
+        loadYandexMetrika();
+        hideCookieBanner(banner);
+      });
+    }
+
+    if (essentialBtn) {
+      essentialBtn.addEventListener('click', function () {
+        setCookieConsent('essential');
+        hideCookieBanner(banner);
+      });
+    }
+  }
+
+  initCookieConsent();
+
   // Hamburger: открытие/закрытие мобильного меню
   var headerEl = document.getElementById('header');
   var nav = document.getElementById('nav');
@@ -9,6 +116,14 @@
   function syncMobileMenuHeader(isOpen) {
     if (!headerEl) return;
     headerEl.classList.toggle('header--menu-open', isOpen);
+  }
+
+  function closeMobileMenu() {
+    if (!nav || !navToggle) return;
+    nav.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Открыть меню');
+    syncMobileMenuHeader(false);
   }
 
   if (nav && navToggle) {
@@ -23,20 +138,23 @@
     for (var i = 0; i < links.length; i++) {
       links[i].addEventListener('click', function () {
         if (window.innerWidth <= 768) {
-          nav.classList.remove('is-open');
-          navToggle.setAttribute('aria-expanded', 'false');
-          navToggle.setAttribute('aria-label', 'Открыть меню');
-          syncMobileMenuHeader(false);
+          closeMobileMenu();
+        }
+      });
+    }
+
+    var headerToolLinks = document.querySelectorAll('.header__tools a');
+    for (var t = 0; t < headerToolLinks.length; t++) {
+      headerToolLinks[t].addEventListener('click', function () {
+        if (window.innerWidth <= 768) {
+          closeMobileMenu();
         }
       });
     }
 
     window.addEventListener('resize', function () {
       if (window.innerWidth > 768) {
-        nav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        navToggle.setAttribute('aria-label', 'Открыть меню');
-        syncMobileMenuHeader(false);
+        closeMobileMenu();
       }
     });
   }
@@ -45,8 +163,12 @@
   var animated = document.querySelectorAll('.animate-on-scroll');
 
   function setStaggerIndex() {
-    var skillsGroups = document.querySelectorAll('.skills__group');
-    skillsGroups.forEach(function (el, i) {
+    var resultCards = document.querySelectorAll('#results .result-card');
+    resultCards.forEach(function (el, i) {
+      el.style.setProperty('--i', i);
+    });
+    var teamRoles = document.querySelectorAll('#team .team-role');
+    teamRoles.forEach(function (el, i) {
       el.style.setProperty('--i', i);
     });
     var faqItems = document.querySelectorAll('#faq .faq-item');
@@ -55,6 +177,10 @@
     });
     var serviceCards = document.querySelectorAll('#services .service-card');
     serviceCards.forEach(function (el, i) {
+      el.style.setProperty('--i', i);
+    });
+    var painCards = document.querySelectorAll('#pains .pain-card');
+    painCards.forEach(function (el, i) {
       el.style.setProperty('--i', i);
     });
     var timelineItems = document.querySelectorAll('.timeline__item');
@@ -106,7 +232,17 @@
   updateHeaderScroll();
 
   // Подсветка активного раздела в навигации (линия под пунктом)
-  var sectionIds = ['hero', 'services', 'experience', 'projects-cases', 'skills', 'trusted', 'faq', 'contacts'];
+  var sectionIds = ['hero', 'pains', 'results', 'process', 'express-audit', 'services', 'projects', 'team', 'faq', 'final-cta', 'contacts'];
+  // Секции без пункта в меню привязываем к ближайшему якорю в header
+  var navSectionAlias = {
+    results: 'pains',
+    services: 'express-audit',
+    'final-cta': 'contacts'
+  };
+
+  function getNavHighlightId(sectionId) {
+    return navSectionAlias[sectionId] || sectionId;
+  }
 
   function setActiveNav() {
     if (!nav) return;
@@ -121,11 +257,12 @@
       }
     }
 
+    var highlightId = getNavHighlightId(activeId);
     var navLinks = nav.querySelectorAll('a[href^="#"]');
     for (var i = 0; i < navLinks.length; i++) {
       var href = navLinks[i].getAttribute('href');
       var id = href === '#' ? 'hero' : href.slice(1);
-      if (id === activeId) {
+      if (id === highlightId) {
         navLinks[i].classList.add('is-active');
       } else {
         navLinks[i].classList.remove('is-active');
@@ -252,6 +389,43 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         closeLightbox();
+      }
+    });
+  }
+
+  // Кейсы: раскрытие остальных работ (скриншоты остаются в карточках)
+  var projectsToggle = document.getElementById('projectsMoreToggle');
+  var projectsPanel = document.getElementById('projectsMorePanel');
+  if (projectsToggle && projectsPanel) {
+    var toggleText = projectsToggle.querySelector('.projects-more__toggle-text');
+    var labelShow = projectsToggle.getAttribute('data-label-show') || 'Показать остальные работы';
+    var labelHide = projectsToggle.getAttribute('data-label-hide') || 'Скрыть работы';
+    var projectCount = projectsPanel.querySelectorAll('.card').length;
+
+    function setProjectsToggleLabel(open) {
+      if (!toggleText) {
+        return;
+      }
+      toggleText.textContent = open
+        ? labelHide
+        : labelShow + ' (' + projectCount + ')';
+    }
+
+    function revealProjectsAnimations() {
+      var cards = projectsPanel.querySelectorAll('.animate-on-scroll:not(.visible)');
+      cards.forEach(function (el) {
+        el.classList.add('visible');
+      });
+    }
+
+    projectsToggle.addEventListener('click', function () {
+      var willOpen = projectsPanel.hidden;
+      projectsPanel.hidden = !willOpen;
+      projectsToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      projectsToggle.closest('.projects-more').classList.toggle('projects-more--open', willOpen);
+      setProjectsToggleLabel(willOpen);
+      if (willOpen) {
+        revealProjectsAnimations();
       }
     });
   }

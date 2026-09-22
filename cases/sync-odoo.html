@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#2563eb">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="ВЧ — Odoo Developer">
+  <meta property="og:site_name" content="ВЧ — студия Odoo">
   <meta property="og:title" content="Кейс: синхронизация между Odoo-инстансами">
   <meta property="og:description" content="Двусторонний обмен заказами, отгрузками, стоками и сообщениями между Odoo. Очереди, обработка ошибок, поддержка продакшена.">
   <meta property="og:url" content="https://www.vch-tech.com/cases/sync-odoo.html">
@@ -34,7 +34,7 @@
       },
       "publisher": {
         "@type": "Organization",
-        "name": "ВЧ — Odoo Developer",
+        "name": "ВЧ — студия Odoo",
         "url": "https://www.vch-tech.com/"
       },
       "about": ["Odoo", "интеграции Odoo", "REST API", "ERP", "WMS"]
@@ -45,11 +45,19 @@
   <header class="header header--scrolled" id="header">
     <div class="header__inner">
       <a href="../index.html" class="logo">В<span class="logo-accent">Ч</span></a>
-      <nav class="nav nav--case" id="nav">
-        <a href="../index.html">Главная</a>
-        <a href="../index.html#projects-cases">Проекты</a>
-        <a href="../index.html#contacts">Контакты</a>
-      </nav>
+      <div class="header__actions">
+        <nav class="nav nav--case" id="nav">
+          <a href="../index.html">Главная</a>
+          <a href="../index.html#projects">Проекты</a>
+          <a href="../index.html#contacts">Контакты</a>
+        </nav>
+        <div class="header__tools">
+          <a href="tel:+79959663319" class="header__phone" aria-label="Позвонить +7 995 966-33-19" title="Позвонить">
+            <svg class="header__phone-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </a>
+          <a href="../index.html#contacts" class="btn btn--primary header__cta">Связаться</a>
+        </div>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">
         <span></span>
         <span></span>
@@ -64,7 +72,7 @@
         <nav class="case-breadcrumb" aria-label="Навигация">
           <a href="../index.html">Главная</a>
           <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
-          <a href="../index.html#projects-cases">Проекты</a>
+          <a href="../index.html#projects">Проекты</a>
           <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
           <span>Синхронизация Odoo</span>
         </nav>
@@ -159,8 +167,8 @@
           <h2>Технологии и подход</h2>
           <p>
             Кастомные модули Odoo, Python, REST/RPC, Docker/K8s в существующих пайплайнах, работа с логами
-            и продакшен-инцидентами. Все доработки — без правок core Odoo, чтобы интеграцию можно было
-            развивать и сопровождать независимо от одного исполнителя.
+            и продакшен-инцидентами. Интеграцию можно развивать и сопровождать независимо от одного
+            исполнителя благодаря понятной логике обмена и документации.
           </p>
         </div>
 
@@ -179,8 +187,68 @@
   </main>
 
   <footer class="footer">
-    <p><a href="../index.html">Червяков Владислав</a> • Odoo / Python Developer</p>
+    <div class="container footer__top">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="../index.html" class="footer__logo">В<span class="logo-accent">Ч</span></a>
+          <p class="footer__tagline">ВЧ — студия Владислава Червякова. Экспресс-аудит, внедрение с нуля или из таблиц, модули, интеграции и сопровождение.</p>
+        </div>
+        <nav class="footer__col" aria-label="Навигация по сайту">
+          <h3 class="footer__col-title">Навигация</h3>
+          <ul class="footer__links">
+            <li><a href="../index.html#pains">Проблемы</a></li>
+            <li><a href="../index.html#process">Подход</a></li>
+            <li><a href="../index.html#express-audit">Экспресс-аудит</a></li>
+            <li><a href="../index.html#services">Услуги</a></li>
+            <li><a href="../index.html#projects">Кейсы</a></li>
+            <li><a href="../index.html#team">Команда</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="../index.html#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__col" aria-label="Кейсы">
+          <h3 class="footer__col-title">Кейсы</h3>
+          <ul class="footer__links">
+            <li><a href="buildflow.html">Buildflow ERP на Odoo 17</a></li>
+            <li><a href="sync-odoo.html" aria-current="page">Синхронизация между двумя Odoo</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h3 class="footer__col-title">Контакты</h3>
+          <ul class="footer__links">
+            <li><a href="https://t.me/skbarawork" target="_blank" rel="noopener">Telegram @skbarawork</a></li>
+            <li><a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li>
+            <li><a href="tel:+79959663319">+7 995 966-33-19</a></li>
+            <li><a href="../index.html#contacts">Форма заявки</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copy">© 2026 ВЧ — студия Владислава Червякова. Все права защищены.</p>
+        <nav class="footer__legal" aria-label="Юридическая информация">
+          <a href="../privacy.html">Политика конфиденциальности</a>
+          <a href="../consent.html">Согласие на обработку данных</a>
+        </nav>
+      </div>
+    </div>
   </footer>
+
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden>
+    <div class="cookie-banner__inner container">
+      <p class="cookie-banner__text" id="cookieBannerDesc">
+        <span id="cookieBannerTitle" class="visually-hidden">Уведомление о cookie</span>
+        Мы используем cookie для корректной работы сайта и оценки посещаемости.
+        Продолжая использовать сайт, вы можете принять все cookie или оставить только необходимые.
+        Подробнее в <a href="../privacy.html">политике конфиденциальности</a> и <a href="../consent.html">согласии на обработку данных</a>.
+      </p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="btn btn--cookie-essential" id="cookieEssential">Только необходимое</button>
+        <button type="button" class="btn btn--primary" id="cookieAccept">Принять</button>
+      </div>
+    </div>
+  </div>
 
   <script src="../script.js"></script>
 </body>

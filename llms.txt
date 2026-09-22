@@ -1,70 +1,92 @@
-# ВЧ — Odoo Developer (Червяков Владислав)
+# ВЧ — студия Odoo (Студия Владислава Червякова)
 
-> Odoo / Python разработчик в России. Кастомные модули, интеграции, MVP, техподдержка и масштабирование ERP на Odoo Community. Основной фокус: Odoo 17/18/19, Python, ERP/WMS, строительные и операционные реестры.
+> Небольшая студия Odoo в России: экспресс-аудит (главный вход), внедрение с нуля или из Excel/Google Таблиц, кастомные модули, интеграции и сопровождение на Odoo Community. Odoo 17/18/19, Python, ERP/WMS.
 
 ## Canonical
 
 - Website: https://www.vch-tech.com/
 - Extended profile (plain text): https://www.vch-tech.com/about.txt
 - Sitemap: https://www.vch-tech.com/sitemap.xml
+- Privacy policy: https://www.vch-tech.com/privacy.html
+- Personal data consent: https://www.vch-tech.com/consent.html
+
+## Main page sections (anchors)
+
+- #pains — typical client situations (no Odoo yet, Excel/Sheets, integrations, MVP, support)
+- #results — measurable outcomes from projects
+- #process — work approach: diagnosis → analysis → target model → plan → delivery
+- #express-audit — primary entry product: express audit
+- #services — service list
+- #projects — case study links and project highlights
+- #team — studio roles, founder, partners
+- #faq — frequently asked questions
+- #contacts — contact form and Telegram / phone / email
 
 ## Case studies
 
 - Buildflow ERP (Odoo 17 MVP): https://www.vch-tech.com/cases/buildflow.html
-- Odoo instance sync / integrations: https://www.vch-tech.com/cases/sync-odoo.html
+- Sync between two Odoo instances: https://www.vch-tech.com/cases/sync-odoo.html
 
-## Person
+## Organization
 
-- Name: Червяков Владислав Андреевич
-- Role: Odoo / Python Developer
+- Name: ВЧ — студия Odoo
+- Alternate name: Студия Владислава Червякова
+- Founder: Червяков Владислав (Odoo architect)
 - Location: Russia (remote-friendly)
 - Languages: Russian (native), English (working)
 
 ## Summary
 
-Архитектура и разработка модулей Odoo без правок core, интеграции между системами и Odoo-инстансами, поддержка продакшена. Подключение как разработчик и архитектор: аудит, MVP, перевод процессов из Excel/Google Таблиц, сопровождение после релиза.
+Студия помогает перевести операционку в Odoo — с нуля, из таблиц или при доработке существующей системы. Экспресс-аудит фиксирует процессы, риски и следующий шаг без «пустого» sales-call.
+
+## Entry product (primary)
+
+- Экспресс-аудит: for companies with or without Odoo; transition from Excel/Sheets; process map, risks, architecture/MVP hints, next step
+- Sign-up: #contacts form or Telegram @skbarawork
 
 ## Services
 
+- Экспресс-аудит Odoo
 - Аудит и проектирование Odoo-решения
-- Разработка кастомных модулей Odoo (модели, views, record rules, импорты, cron, backend UX)
+- Разработка кастомных модулей Odoo
 - Интеграции Odoo с CRM, ERP, API, документооборотом, Telegram
-- MVP на Odoo Community и миграция с таблиц
+- MVP на Odoo Community и миграция с Excel / Google Таблиц
 - Техническая поддержка и развитие после запуска
 - Масштабирование после MVP
 
-## Expertise (keywords)
-
-Odoo, Odoo 17, Odoo 18, Odoo 19, Odoo Community, Python, кастомные модули Odoo, интеграции Odoo, ERP, WMS, Docker, REST API, spreadsheet_dashboard, DMS OCA, Excel/CSV import, двусторонняя синхронизация Odoo
-
 ## Selected results
 
-- Buildflow ERP MVP (Odoo 17): реестры смет, договоров, актов; роли и record rules; dashboard; DMS OCA; отказ от Google Таблиц как основного инструмента
-- Двусторонняя синхронизация Odoo: ~100 заказов/закупок, ~200 отгрузок, ~500 сообщений и вложений в день; инциденты с 15 до 3–4 в неделю
-- Импорт Excel/CSV: заказы 100–200 позиций с 1–2 часов до ~5 минут
-- Первая линия поддержки интеграций: ~300 тикетов, реакция до 5 минут
+- Buildflow MVP (Odoo 17): registries, roles, dashboard; moved off Google Sheets
+- Odoo sync: incidents ~15/week → 3–4/week at high daily volume
+- Excel/CSV import: 100–200 line orders ~1–2h → ~5 min
+- Modular architecture for handoff to client or other teams
 
 ## FAQ (short)
 
-- Versions: Odoo 17/18/19 primarily; other versions possible by project state
-- MVP / Excel start: yes, typical scenario
-- Post-launch support and scale-up after MVP: yes
-- Integrations: yes, with focus on resilience and error recovery
+- No Odoo yet: yes — express audit + MVP path
+- Excel/Sheets start: yes, typical
+- Versions: Odoo 17/18/19 primarily
+- Post-launch support and scale-up: yes
 - Partial engagement / join existing team: yes
-- No hard vendor lock-in if built via custom modules without core patches
 
 ## Contact
 
 - Telegram: https://t.me/skbarawork (@skbarawork) — preferred
 - Email: skbarawork@gmail.com
 - Phone: +7-995-966-33-19
+- Web form (#contacts): required name + phone
 
-## Same as
+## Team
+
+- Владислав Червяков — founder, Odoo architect
+- Бобров Семен — Odoo development, support
+- Червяков Александр — Bitrix24 CRM, telephony/social, web
+
+## Last updated
+
+2026-05-22
+
+## Founder links
 
 - GitHub: https://github.com/skbara
 - LinkedIn: https://www.linkedin.com/in/vladislav-chervyakov-a26a5839a/
-
-## Team (optional capacity)
-
-- Бобров Семен — Odoo, support after development phases
-- Червяков Александр — Bitrix24 CRM, telephony/social integrations, web

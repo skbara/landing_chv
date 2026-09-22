@@ -123,7 +123,7 @@
 
 Навыки: 
 - Продвинутый уровень:
-Odoo 17/18
+Odoo 17/18/19
 Python
 XML
 JavaScript
