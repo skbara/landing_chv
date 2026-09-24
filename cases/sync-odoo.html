@@ -3,62 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Кейс: двусторонняя синхронизация Odoo | Интеграции заказов, отгрузок, стоков</title>
-  <meta name="description" content="Интеграция двух Odoo-инстансов: заказы, закупки, отгрузки, сообщения и вложения. Снижение инцидентов с 15 до 3–4 в неделю, устойчивость и восстановление после ошибок.">
+  <title>SPL: синхронизация двух Odoo | Студия Владислава Червякова</title>
+  <meta name="description" content="Кейс Червякова Владислава в kt.team: двусторонняя синхронизация двух Odoo для магазина SPL в Дубае, заказы, склад, сообщения и устойчивый обмен.">
   <link rel="canonical" href="https://www.vch-tech.com/cases/sync-odoo.html">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="ВЧ — студия Odoo">
-  <meta property="og:title" content="Кейс: синхронизация между Odoo-инстансами">
-  <meta property="og:description" content="Двусторонний обмен заказами, отгрузками, стоками и сообщениями между Odoo. Очереди, обработка ошибок, поддержка продакшена.">
+  <meta property="og:site_name" content="Студия Владислава Червякова">
+  <meta property="og:title" content="Синхронизация двух Odoo для проекта SPL в Дубае">
+  <meta property="og:description" content="Проект Червякова Владислава в команде kt.team для SPL: обмен заказами, отгрузками, остатками и сообщениями между двумя Odoo.">
   <meta property="og:url" content="https://www.vch-tech.com/cases/sync-odoo.html">
-  <meta property="og:image" content="https://www.vch-tech.com/images/og-cover.png">
+  <meta property="og:image" content="https://www.vch-tech.com/images/cases/sync-odoo-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Схема двусторонней синхронизации двух систем Odoo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Синхронизация двух Odoo для проекта SPL в Дубае">
+  <meta name="twitter:description" content="Проект Червякова Владислава в команде kt.team для SPL: обмен заказами, отгрузками, остатками и сообщениями между двумя Odoo.">
+  <meta name="twitter:image" content="https://www.vch-tech.com/images/cases/sync-odoo-og.png">
+  <meta name="twitter:image:alt" content="Схема двусторонней синхронизации двух систем Odoo">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../styles.css?v=20260924f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://www.vch-tech.com/cases/sync-odoo.html#webpage",
+      "url": "https://www.vch-tech.com/cases/sync-odoo.html",
+      "name": "SPL: синхронизация двух Odoo | Студия Владислава Червякова",
+      "inLanguage": "ru-RU",
+      "isPartOf": {
+        "@id": "https://www.vch-tech.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://www.vch-tech.com/cases/sync-odoo.html#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://www.vch-tech.com/cases/sync-odoo.html#article"
+      },
+      "description": "Кейс Червякова Владислава в kt.team: двусторонняя синхронизация двух Odoo для магазина SPL в Дубае, заказы, склад, сообщения и устойчивый обмен."
+    },
+    {
       "@type": "Article",
-      "headline": "Двусторонняя синхронизация между Odoo-инстансами",
-      "description": "Интеграционный контур Odoo: заказы, отгрузки, стоки, сообщения. Снижение инцидентов и первая линия поддержки.",
+      "headline": "Синхронизация двух Odoo для подготовки магазина SPL в Дубае",
+      "description": "Кейс Червякова Владислава в команде kt.team: обмен заказами, отгрузками, остатками и сообщениями между двумя Odoo для проекта SPL.",
       "url": "https://www.vch-tech.com/cases/sync-odoo.html",
       "inLanguage": "ru-RU",
       "author": {
-        "@type": "Person",
-        "name": "Червяков Владислав Андреевич",
-        "url": "https://www.vch-tech.com/"
+        "@id": "https://www.vch-tech.com/#person"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "ВЧ — студия Odoo",
-        "url": "https://www.vch-tech.com/"
+        "@id": "https://www.vch-tech.com/#organization",
+        "name": "Студия Владислава Червякова",
+        "url": "https://www.vch-tech.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.vch-tech.com/images/logo-512.png",
+          "width": 512,
+          "height": 512
+        }
       },
-      "about": ["Odoo", "интеграции Odoo", "REST API", "ERP", "WMS"]
+      "about": [
+        "Odoo",
+        "двусторонняя синхронизация Odoo",
+        "REST API",
+        "ERP"
+      ],
+      "@id": "https://www.vch-tech.com/cases/sync-odoo.html#article",
+      "mainEntityOfPage": {
+        "@id": "https://www.vch-tech.com/cases/sync-odoo.html#webpage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.vch-tech.com/images/cases/sync-odoo-og.png",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.vch-tech.com/cases/sync-odoo.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://www.vch-tech.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Кейсы",
+          "item": "https://www.vch-tech.com/#projects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Синхронизация двух Odoo для SPL",
+          "item": "https://www.vch-tech.com/cases/sync-odoo.html"
+        }
+      ]
     }
+  ]
+}
   </script>
 </head>
 <body class="case-page">
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
   <header class="header header--scrolled" id="header">
     <div class="header__inner">
-      <a href="../index.html" class="logo">В<span class="logo-accent">Ч</span></a>
+      <a href="../index.html" class="logo" aria-label="Студия Владислава Червякова — главная"><span class="logo__mark">В<span class="logo-accent">Ч</span></span><span class="logo__name">Студия Владислава Червякова</span></a>
       <div class="header__actions">
-        <nav class="nav nav--case" id="nav">
+        <nav class="nav nav--case" id="nav" aria-label="Основная навигация">
           <a href="../index.html">Главная</a>
           <a href="../index.html#projects">Проекты</a>
-          <a href="../index.html#contacts">Контакты</a>
+          <a href="../contacts.html">Контакты</a>
         </nav>
         <div class="header__tools">
           <a href="tel:+79959663319" class="header__phone" aria-label="Позвонить +7 995 966-33-19" title="Позвонить">
             <svg class="header__phone-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
           </a>
-          <a href="../index.html#contacts" class="btn btn--primary header__cta">Связаться</a>
+          <a href="../contacts.html" class="btn btn--primary header__cta">Связаться</a>
         </div>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" type="button" aria-expanded="false" aria-controls="nav">
         <span></span>
         <span></span>
         <span></span>
@@ -66,32 +140,34 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <header class="case-hero">
       <div class="case-hero__inner">
-        <nav class="case-breadcrumb" aria-label="Навигация">
+        <nav class="case-breadcrumb" aria-label="Хлебные крошки">
           <a href="../index.html">Главная</a>
           <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
           <a href="../index.html#projects">Проекты</a>
           <span class="case-breadcrumb__sep" aria-hidden="true">/</span>
           <span>Синхронизация Odoo</span>
         </nav>
-        <p class="case-hero__label">Кейс • Интеграции • Продакшен</p>
-        <h1 class="case-hero__title">Двусторонняя синхронизация между Odoo-инстансами</h1>
+        <p class="case-hero__label">Опыт основателя • Интеграции • kt.team</p>
+        <h1 class="case-hero__title">Синхронизация двух Odoo для проекта SPL в Дубае</h1>
         <p class="case-hero__lead">
-          Проектирование и развитие интеграционного контура между двумя Odoo: заказы, закупки, отгрузки,
-          остатки, сообщения и вложения. Упор на устойчивость обмена, прозрачную логику и быстрое
-          восстановление после сбоев.
+          Во время работы в kt.team Червяков Владислав проектировал и развивал обмен между двумя Odoo для подготовки
+          магазина Service Parts Logistics (SPL) в Дубае: заказы, закупки, отгрузки, остатки, сообщения и вложения.
+          Контур рассчитан на устойчивую работу и восстановление после сбоев.
         </p>
-        <ul class="case-hero__meta">
-          <li><strong>Роль:</strong> Odoo Middle / Python Developer, архитектура синхронизации</li>
-          <li><strong>Период:</strong> май 2024 — декабрь 2025</li>
-          <li><strong>Контекст:</strong> коммерческий проект, kt.team</li>
-        </ul>
         <div class="case-hero__actions">
-          <a href="../index.html#contacts" class="btn btn--primary">Обсудить интеграцию</a>
+          <a href="../contacts.html?topic=integration" class="btn btn--primary">Обсудить интеграцию</a>
           <a href="../index.html#projects" class="btn btn--outline">Все проекты</a>
         </div>
+        <ul class="case-hero__meta">
+          <li><strong>Задачи:</strong> двусторонний обмен заказами, закупками, отгрузками, остатками и сообщениями для подготовки магазина SPL в Дубае</li>
+          <li><strong>Формат:</strong> опыт основателя студии: архитектура и Odoo / Python-разработка во время работы в <a href="https://kt.team/" target="_blank" rel="noopener noreferrer">kt.team</a></li>
+          <li><strong>Период:</strong> май 2024 — декабрь 2025</li>
+          <li><strong>Отрасль:</strong> торговля запчастями для спецтехники</li>
+          <li><strong>Сайт компании:</strong> <a href="https://zapchastrf.ru/" target="_blank" rel="noopener noreferrer">ЗАПЧАСТЬ.РФ</a></li>
+        </ul>
       </div>
     </header>
 
@@ -102,9 +178,8 @@
           <li>REST API</li>
           <li>RPC</li>
           <li>Интеграции</li>
-          <li>WMS</li>
+          <li>Двусторонний обмен</li>
           <li>Очереди</li>
-          <li>Поддержка продакшена</li>
         </ul>
 
         <ul class="case-stats animate-on-scroll">
@@ -127,55 +202,43 @@
         </ul>
 
         <div class="case-body animate-on-scroll">
-          <h2>Задача</h2>
+          <h2>Задача: подготовить обмен данными для магазина SPL в Дубае</h2>
           <p>
-            Два Odoo-инстанса должны обмениваться операционными данными в режиме, близком к реальному времени:
-            продажи, закупки, склад, переписка по документам. При сбоях — риск расхождения остатков, «зависших»
-            заказов и нагрузки на службу поддержки. Отдельных ролей BA/QA в команде не было — требовались
-            проектирование, разработка, тестирование и сопровождение одним контуром.
+            Для проекта Service Parts Logistics (SPL, теперь ЗАПЧАСТЬ.РФ) два Odoo-инстанса должны обмениваться операционными данными в режиме, близком к реальному времени:
+            продажи, закупки, отгрузки, складские остатки и переписка по документам. При сбоях возникает риск
+            расхождения данных между системами и остановки обработки заказов.
           </p>
+          <p>Червяков Владислав выполнял эту работу как сотрудник <a href="https://kt.team/" target="_blank" rel="noopener noreferrer">kt.team</a>. Этот кейс относится к его профессиональному опыту; ниже описаны его зона ответственности и результат работы над интеграцией.</p>
 
-          <h2>Что сделано</h2>
+          <h2>Как устроена синхронизация</h2>
           <ul>
-            <li><strong>Архитектура синхронизации:</strong> структура обмена, стандарты модулей, границы ответственности между инстансами.</li>
-            <li><strong>Объекты обмена:</strong> <code>sale.order</code>, <code>purchase.order</code>, <code>stock.picking</code>, остатки, сообщения, вложения.</li>
-            <li><strong>Импорт Excel/CSV:</strong> универсальные модули для заказов, отгрузок и закупок (до 500 строк) — крупные заказы с 1–2 часов до ~5 минут.</li>
-            <li><strong>Бизнес-логика:</strong> перерасчёт остатков, доставка, уведомления, cron-задачи.</li>
-            <li><strong>Устойчивость:</strong> оптимизация очередей, обработка ошибок, автоматическое восстановление после сбоев.</li>
-            <li><strong>Остатки:</strong> прозрачный расчёт стоков — клиентская служба перестала вручную уточнять количества на складе.</li>
+            <li><strong>Архитектура обмена:</strong> Червяков Владислав проектировал структуру синхронизации и границы ответственности двух Odoo-инстансов.</li>
+            <li><strong>Данные:</strong> между системами передаются заказы, закупки, отгрузки, остатки, сообщения и вложения.</li>
+            <li><strong>Устойчивость:</strong> очереди и обработка ошибок позволяют выявлять сбои и восстанавливать обмен.</li>
           </ul>
 
-          <h2>Поддержка и команда</h2>
-          <p>
-            Назначен ответственным за первую линию поддержки интеграционного контура: до 30 обращений в неделю,
-            время первой реакции до 5 минут, восстановление в течение дня. За период работы закрыто около 300 тикетов,
-            подготовлен документ с типовыми инцидентами и инструкциями — снижена доля повторяющихся сбоев.
-          </p>
-          <p>
-            Параллельно — распределение задач между тремя разработчиками, стандарты кода и проектирование
-            решений при совмещении ролей разработчика, аналитика и тестировщика.
-          </p>
-
-          <h2>Результат</h2>
+          <h2>Результат оптимизации обмена</h2>
           <ul>
-            <li>Стабильный ежедневный обмен с предсказуемой логикой и восстановлением после ошибок.</li>
-            <li>Существенное снижение числа инцидентов на интеграционном контуре.</li>
-            <li>Ускорение операционных сценариев (импорт, остатки) и снижение нагрузки на поддержку.</li>
-            <li>Документированные типовые сбои для передачи знаний внутри команды.</li>
+            <li>Ежедневно синхронизировались примерно 100 заказов и закупок, 200 отгрузок и 500 сообщений с вложениями.</li>
+            <li>После оптимизации число инцидентов на контуре обмена снизилось примерно с 15 до 3–4 в неделю.</li>
           </ul>
+          <p>Подробнее о похожих задачах: <a href="../services/odoo-integrations.html">интеграции Odoo</a>, <a href="../services/odoo-support.html">сопровождение Odoo</a> и <a href="tridoks.html">интеграция магазина Tridoks с Odoo и Stripe</a> (в работе).</p>
 
           <h2>Технологии и подход</h2>
           <p>
-            Кастомные модули Odoo, Python, REST/RPC, Docker/K8s в существующих пайплайнах, работа с логами
-            и продакшен-инцидентами. Интеграцию можно развивать и сопровождать независимо от одного
-            исполнителя благодаря понятной логике обмена и документации.
+            Модули Odoo, Python, REST/RPC, очереди обмена и работа с ошибками. Архитектура разделяет потоки данных
+            между двумя системами и помогает локализовать сбои синхронизации.
           </p>
         </div>
+
+        <figure class="case-diagram animate-on-scroll">
+          <img src="../images/cases/sync-odoo.svg" alt="Схема двусторонней синхронизации данных между двумя системами Odoo" loading="lazy" width="1200" height="675">
+        </figure>
 
         <div class="case-cta animate-on-scroll">
           <h2 class="case-cta__title">Нужна интеграция Odoo с другой системой?</h2>
           <p class="case-cta__text">Спроектируем обмен, закроем сценарии ошибок и подключимся к поддержке после запуска.</p>
-          <a href="../index.html#contacts" class="btn btn--primary">Связаться</a>
+          <a href="../contacts.html" class="btn btn--primary">Связаться</a>
         </div>
 
         <div class="case-related animate-on-scroll">
@@ -190,8 +253,8 @@
     <div class="container footer__top">
       <div class="footer__grid">
         <div class="footer__brand">
-          <a href="../index.html" class="footer__logo">В<span class="logo-accent">Ч</span></a>
-          <p class="footer__tagline">ВЧ — студия Владислава Червякова. Экспресс-аудит, внедрение с нуля или из таблиц, модули, интеграции и сопровождение.</p>
+          <a href="../index.html" class="footer__logo" aria-label="Студия Владислава Червякова — главная">В<span class="logo-accent">Ч</span></a>
+          <p class="footer__tagline">Студия Владислава Червякова. Экспресс-аудит, внедрение с нуля или из таблиц, модули, интеграции и сопровождение.</p>
         </div>
         <nav class="footer__col" aria-label="Навигация по сайту">
           <h3 class="footer__col-title">Навигация</h3>
@@ -203,7 +266,7 @@
             <li><a href="../index.html#projects">Кейсы</a></li>
             <li><a href="../index.html#team">Команда</a></li>
             <li><a href="../index.html#faq">FAQ</a></li>
-            <li><a href="../index.html#contacts">Контакты</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
           </ul>
         </nav>
         <nav class="footer__col" aria-label="Кейсы">
@@ -219,14 +282,14 @@
             <li><a href="https://t.me/skbarawork" target="_blank" rel="noopener">Telegram @skbarawork</a></li>
             <li><a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li>
             <li><a href="tel:+79959663319">+7 995 966-33-19</a></li>
-            <li><a href="../index.html#contacts">Форма заявки</a></li>
+            <li><a href="../contacts.html">Форма заявки</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-        <p class="footer__copy">© 2026 ВЧ — студия Владислава Червякова. Все права защищены.</p>
+        <p class="footer__copy">© 2026 Студия Владислава Червякова. Все права защищены.</p>
         <nav class="footer__legal" aria-label="Юридическая информация">
           <a href="../privacy.html">Политика конфиденциальности</a>
           <a href="../consent.html">Согласие на обработку данных</a>
@@ -235,7 +298,7 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden>
+  <div class="cookie-banner" id="cookieBanner" role="region" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden>
     <div class="cookie-banner__inner container">
       <p class="cookie-banner__text" id="cookieBannerDesc">
         <span id="cookieBannerTitle" class="visually-hidden">Уведомление о cookie</span>
@@ -250,6 +313,6 @@
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20260924f"></script>
 </body>
 </html>

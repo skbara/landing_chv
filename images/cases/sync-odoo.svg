@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Двусторонняя синхронизация Odoo</title>
+  <desc id="desc">Условная схема обмена данными между двумя системами Odoo.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eaf1ff"/><stop offset="1" stop-color="#f8f9fb"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="15" stdDeviation="20" flood-color="#173f85" flood-opacity=".11"/></filter>
+    <marker id="arrow" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto"><path d="M1 1l10 5.5L1 12" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="80" cy="580" r="190" fill="#dbeafe" opacity=".58"/><circle cx="1150" cy="90" r="185" fill="#dbeafe" opacity=".55"/>
+  <g filter="url(#shadow)">
+    <rect x="92" y="136" width="390" height="400" rx="28" fill="#fff"/>
+    <rect x="718" y="136" width="390" height="400" rx="28" fill="#fff"/>
+  </g>
+  <g font-family="Arial,sans-serif">
+    <rect x="120" y="165" width="75" height="75" rx="20" fill="#dbeafe"/><path d="M144 188h27v27h-27z" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/><path d="M150 195h15M150 202h15M150 209h9" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+    <text x="214" y="211" fill="#1a1a1f" font-size="34" font-weight="700">Odoo</text>
+    <rect x="746" y="165" width="75" height="75" rx="20" fill="#dbeafe"/><path d="M770 188h27v27h-27z" fill="none" stroke="#2563eb" stroke-width="4" stroke-linejoin="round"/><path d="M776 195h15M776 202h15M776 209h9" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+    <text x="840" y="211" fill="#1a1a1f" font-size="34" font-weight="700">Odoo</text>
+    <g fill="#f7faff" stroke="#e3ebf7"><rect x="122" y="286" width="330" height="59" rx="12"/><rect x="122" y="360" width="330" height="59" rx="12"/><rect x="122" y="434" width="330" height="59" rx="12"/><rect x="748" y="286" width="330" height="59" rx="12"/><rect x="748" y="360" width="330" height="59" rx="12"/><rect x="748" y="434" width="330" height="59" rx="12"/></g>
+    <g fill="#2563eb"><circle cx="151" cy="315" r="7"/><circle cx="151" cy="389" r="7"/><circle cx="151" cy="463" r="7"/><circle cx="777" cy="315" r="7"/><circle cx="777" cy="389" r="7"/><circle cx="777" cy="463" r="7"/></g>
+    <g stroke="#c2d1e8" stroke-width="9" stroke-linecap="round"><path d="M176 315h196M176 389h149M176 463h177M802 315h196M802 389h149M802 463h177"/></g>
+    <text x="600" y="268" fill="#2563eb" font-size="18" text-anchor="middle" font-weight="700">Обмен данными</text>
+  </g>
+  <path d="M512 335h173" stroke="#2563eb" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M688 407H515" stroke="#2563eb" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <circle cx="600" cy="544" r="25" fill="#dbeafe"/><path d="M591 544l6 6 13-15" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

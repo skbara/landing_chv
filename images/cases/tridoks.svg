@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Tridoks: магазин со связями с Odoo и Stripe</title>
+  <desc id="desc">Условная схема двух отдельных интеграций интернет-магазина Tridoks: с Odoo и со Stripe.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eaf1ff"/><stop offset="1" stop-color="#f8f9fb"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="19" flood-color="#173f85" flood-opacity=".11"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1120" cy="55" r="175" fill="#dbeafe" opacity=".5"/>
+  <circle cx="92" cy="590" r="175" fill="#dbeafe" opacity=".45"/>
+  <g fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M527 340v30c0 15-12 27-27 27H325v30"/>
+    <path d="M673 340v30c0 15 12 27 27 27h175v30"/>
+  </g>
+  <g fill="#fff" stroke="#2563eb" stroke-width="4"><circle cx="527" cy="340" r="7"/><circle cx="325" cy="427" r="7"/><circle cx="673" cy="340" r="7"/><circle cx="875" cy="427" r="7"/></g>
+  <g filter="url(#shadow)">
+    <rect x="410" y="82" width="380" height="258" rx="27" fill="#fff"/>
+    <rect x="143" y="427" width="364" height="175" rx="27" fill="#fff"/>
+    <rect x="693" y="427" width="364" height="175" rx="27" fill="#fff"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="600" y="134" fill="#1a1a1f" font-size="34" font-weight="700">Tridoks</text>
+    <text x="600" y="166" fill="#64748b" font-size="19">Интернет-магазин</text>
+    <text x="325" y="562" fill="#1a1a1f" font-size="27" font-weight="700">Odoo</text>
+    <text x="875" y="562" fill="#1a1a1f" font-size="27" font-weight="700">Stripe</text>
+  </g>
+  <rect x="487" y="184" width="226" height="120" rx="15" fill="#f3f7ff" stroke="#dbe7f9"/>
+  <path d="M487 217h226" stroke="#dbe7f9"/>
+  <circle cx="507" cy="201" r="5" fill="#9dbbf1"/><circle cx="524" cy="201" r="5" fill="#bdd0f2"/>
+  <rect x="511" y="238" width="81" height="41" rx="8" fill="#dbeafe"/><rect x="603" y="238" width="81" height="41" rx="8" fill="#dbeafe"/>
+  <rect x="270" y="466" width="110" height="60" rx="15" fill="#dbeafe"/>
+  <path d="M291 483h68M291 494h68M291 505h47" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/>
+  <rect x="807" y="471" width="136" height="50" rx="13" fill="#dbeafe" stroke="#bdd4fa"/>
+  <path d="M807 487h136" stroke="#2563eb" stroke-width="9"/>
+</svg>

@@ -3,6 +3,17 @@
 
   var COOKIE_CONSENT_KEY = 'vch_cookie_consent';
   var YM_ID = 107146057;
+  var MOBILE_MENU_MAX_WIDTH = 1100;
+  var FORM_SUBMIT_TIMEOUT_MS = 3000;
+  var cookieBannerResizeObserver = null;
+
+  function syncCookieBannerSpace(banner) {
+    if (!banner || banner.hidden) return;
+    document.documentElement.style.setProperty(
+      '--cookie-banner-space',
+      Math.ceil(banner.getBoundingClientRect().height + 16) + 'px'
+    );
+  }
 
   function getCookieConsent() {
     try {
@@ -17,6 +28,18 @@
       localStorage.setItem(COOKIE_CONSENT_KEY, value);
     } catch (e) {
       /* localStorage недоступен */
+    }
+  }
+
+  function sendYmGoal(goalName, params) {
+    if (getCookieConsent() !== 'all' || typeof window.ym !== 'function') {
+      return;
+    }
+
+    try {
+      window.ym(YM_ID, 'reachGoal', goalName, params || {});
+    } catch (e) {
+      /* Сбой аналитики не должен влиять на интерфейс сайта */
     }
   }
 
@@ -61,6 +84,11 @@
     }
     banner.hidden = true;
     document.body.classList.remove('cookie-banner-visible');
+    document.documentElement.style.removeProperty('--cookie-banner-space');
+    if (cookieBannerResizeObserver) {
+      cookieBannerResizeObserver.disconnect();
+      cookieBannerResizeObserver = null;
+    }
   }
 
   function showCookieBanner(banner) {
@@ -69,6 +97,17 @@
     }
     banner.hidden = false;
     document.body.classList.add('cookie-banner-visible');
+    syncCookieBannerSpace(banner);
+    if (typeof window.ResizeObserver === 'function') {
+      cookieBannerResizeObserver = new window.ResizeObserver(function () {
+        syncCookieBannerSpace(banner);
+      });
+      cookieBannerResizeObserver.observe(banner);
+    } else {
+      window.addEventListener('resize', function () {
+        syncCookieBannerSpace(banner);
+      }, { passive: true });
+    }
   }
 
   function initCookieConsent() {
@@ -108,6 +147,32 @@
 
   initCookieConsent();
 
+  // Единая цель для ключевых CTA. При необходимости имя можно переопределить
+  // атрибутом data-ym-goal на ссылке или кнопке.
+  document.addEventListener('click', function (e) {
+    var target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+
+    var cta = target.closest('[data-ym-goal], a.btn');
+    if (!cta) return;
+
+    var href = cta.getAttribute('href') || '';
+    var topic = '';
+    if (href) {
+      try {
+        topic = new URL(href, window.location.href).searchParams.get('topic') || '';
+      } catch (urlError) {
+        topic = '';
+      }
+    }
+
+    sendYmGoal(cta.getAttribute('data-ym-goal') || 'cta_click', {
+      cta_text: (cta.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 120),
+      cta_href: href.slice(0, 250),
+      topic: topic
+    });
+  });
+
   // Hamburger: открытие/закрытие мобильного меню
   var headerEl = document.getElementById('header');
   var nav = document.getElementById('nav');
@@ -127,17 +192,25 @@
   }
 
   if (nav && navToggle) {
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-controls', 'nav');
     navToggle.addEventListener('click', function () {
       var isOpen = nav.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', isOpen);
       navToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
       syncMobileMenuHeader(isOpen);
+      if (isOpen) {
+        var firstNavLink = nav.querySelector('a');
+        if (firstNavLink) {
+          firstNavLink.focus();
+        }
+      }
     });
 
     var links = nav.querySelectorAll('a');
     for (var i = 0; i < links.length; i++) {
       links[i].addEventListener('click', function () {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= MOBILE_MENU_MAX_WIDTH) {
           closeMobileMenu();
         }
       });
@@ -146,15 +219,22 @@
     var headerToolLinks = document.querySelectorAll('.header__tools a');
     for (var t = 0; t < headerToolLinks.length; t++) {
       headerToolLinks[t].addEventListener('click', function () {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= MOBILE_MENU_MAX_WIDTH) {
           closeMobileMenu();
         }
       });
     }
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > MOBILE_MENU_MAX_WIDTH) {
         closeMobileMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        closeMobileMenu();
+        navToggle.focus();
       }
     });
   }
@@ -163,10 +243,6 @@
   var animated = document.querySelectorAll('.animate-on-scroll');
 
   function setStaggerIndex() {
-    var resultCards = document.querySelectorAll('#results .result-card');
-    resultCards.forEach(function (el, i) {
-      el.style.setProperty('--i', i);
-    });
     var teamRoles = document.querySelectorAll('#team .team-role');
     teamRoles.forEach(function (el, i) {
       el.style.setProperty('--i', i);
@@ -195,18 +271,23 @@
 
   setStaggerIndex();
 
-  if (animated.length && 'IntersectionObserver' in window) {
+  if (animated.length && 'IntersectionObserver' in window &&
+      !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
     animated.forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) {
+        el.classList.add('will-animate');
+      }
       observer.observe(el);
     });
   } else {
@@ -220,7 +301,11 @@
 
   function updateHeaderScroll() {
     if (headerEl) {
-      if (window.pageYOffset > scrollThreshold) {
+      if (
+        document.body.classList.contains('case-page') ||
+        document.body.classList.contains('legal-page') ||
+        window.pageYOffset > scrollThreshold
+      ) {
         headerEl.classList.add('header--scrolled');
       } else {
         headerEl.classList.remove('header--scrolled');
@@ -232,11 +317,10 @@
   updateHeaderScroll();
 
   // Подсветка активного раздела в навигации (линия под пунктом)
-  var sectionIds = ['hero', 'pains', 'results', 'process', 'express-audit', 'services', 'projects', 'team', 'faq', 'final-cta', 'contacts'];
+  var sectionIds = ['hero', 'projects', 'pains', 'services', 'process', 'express-audit', 'team', 'faq', 'final-cta', 'contacts'];
   // Секции без пункта в меню привязываем к ближайшему якорю в header
   var navSectionAlias = {
-    results: 'pains',
-    services: 'express-audit',
+    pains: 'services',
     'final-cta': 'contacts'
   };
 
@@ -282,6 +366,7 @@
   var lightboxTriggers = document.querySelectorAll('.card__shot-button');
   var lastLightboxTrigger = null;
   var lastLightboxOpenAt = 0;
+  var previousBodyOverflow = '';
 
   function syncLightboxLayout() {
     if (!lightboxDialog || !lightboxImage) return;
@@ -303,9 +388,9 @@
   function closeLightbox() {
     if (!lightbox || lightbox.hidden) return;
     lightbox.hidden = true;
-    document.body.style.overflow = '';
+    document.body.style.overflow = previousBodyOverflow;
     if (lightboxImage) {
-      lightboxImage.setAttribute('src', '');
+      lightboxImage.removeAttribute('src');
       lightboxImage.setAttribute('alt', '');
     }
     if (lightboxCaption) {
@@ -323,7 +408,7 @@
   }
 
   function openLightbox(trigger) {
-    if (!lightbox || !lightboxImage || !lightboxCaption || !trigger) return;
+    if (!lightbox || !lightboxImage || !trigger) return;
 
     var src = trigger.getAttribute('data-lightbox-src') || '';
     var alt = trigger.getAttribute('data-lightbox-alt') || '';
@@ -334,8 +419,11 @@
     lastLightboxTrigger = trigger;
     lightboxImage.setAttribute('src', src);
     lightboxImage.setAttribute('alt', alt);
-    lightboxCaption.textContent = caption;
+    if (lightboxCaption) {
+      lightboxCaption.textContent = caption;
+    }
     lightbox.hidden = false;
+    previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     syncLightboxLayout();
 
@@ -387,6 +475,10 @@
     });
 
     document.addEventListener('keydown', function (e) {
+      if (!lightbox.hidden && e.key === 'Tab' && lightboxClose) {
+        e.preventDefault();
+        lightboxClose.focus();
+      }
       if (e.key === 'Escape') {
         closeLightbox();
       }
@@ -397,6 +489,8 @@
   var projectsToggle = document.getElementById('projectsMoreToggle');
   var projectsPanel = document.getElementById('projectsMorePanel');
   if (projectsToggle && projectsPanel) {
+    projectsPanel.hidden = true;
+    projectsToggle.hidden = false;
     var toggleText = projectsToggle.querySelector('.projects-more__toggle-text');
     var labelShow = projectsToggle.getAttribute('data-label-show') || 'Показать остальные работы';
     var labelHide = projectsToggle.getAttribute('data-label-hide') || 'Скрыть работы';
@@ -430,23 +524,182 @@
     });
   }
 
-  // Форма обратной связи: при YOUR_FORM_ID в action — демо; после подстановки ID — отправка на Formspree
+  // Форма обратной связи: AJAX для Formspree с нативной отправкой как fallback.
   var form = document.getElementById('contactForm');
   if (form) {
-    var action = form.getAttribute('action') || '';
-    var isDemo = action.indexOf('YOUR_FORM_ID') !== -1;
-    form.addEventListener('submit', function (e) {
-      if (isDemo) {
-        e.preventDefault();
-        var btn = form.querySelector('button[type="submit"]');
-        var hint = form.querySelector('.form__hint');
-        if (btn && hint) {
-          btn.textContent = 'Отправлено (демо)';
-          btn.disabled = true;
-          hint.textContent = 'Это демо: подставьте ваш Formspree ID в action формы, чтобы получать заявки на email.';
-          hint.style.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#2563eb';
+    var topicSelect = form.querySelector('select[name="topic"]');
+    var requestedTopic = new URLSearchParams(window.location.search).get('topic');
+    if (topicSelect && requestedTopic && topicSelect.value === '') {
+      for (var optionIndex = 0; optionIndex < topicSelect.options.length; optionIndex++) {
+        if (topicSelect.options[optionIndex].value === requestedTopic) {
+          topicSelect.value = requestedTopic;
+          break;
         }
       }
+    }
+
+    if (topicSelect) {
+      topicSelect.addEventListener('change', function () {
+        if (!topicSelect.value) return;
+        sendYmGoal('contact_topic_selected', {
+          topic: topicSelect.value,
+          source: 'select'
+        });
+      });
+
+      document.querySelectorAll('.contact-option a[href*="topic="]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var targetUrl = new URL(link.href, window.location.href);
+          var targetTopic = targetUrl.searchParams.get('topic');
+          var hasTopic = Array.from(topicSelect.options).some(function (option) {
+            return option.value === targetTopic;
+          });
+          var requestSection = document.getElementById('request');
+          if (!hasTopic || !requestSection) return;
+
+          e.preventDefault();
+          topicSelect.value = targetTopic;
+          sendYmGoal('contact_topic_selected', {
+            topic: targetTopic,
+            source: 'contact_option'
+          });
+          window.history.replaceState(null, '', targetUrl.pathname + targetUrl.search + targetUrl.hash);
+          var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          requestSection.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    var action = form.getAttribute('action') || '';
+    var isDemo = action.indexOf('YOUR_FORM_ID') !== -1;
+    var isFormspree = /^https:\/\/(?:www\.)?formspree\.io\/f\//i.test(action);
+    var submitButton = form.querySelector('button[type="submit"]');
+    var originalSubmitText = submitButton ? submitButton.textContent : '';
+    var formStatus = form.querySelector('[data-form-status], .form__status');
+    var isSubmitting = false;
+
+    if (!formStatus) {
+      formStatus = document.createElement('p');
+      formStatus.className = 'form__status';
+      formStatus.setAttribute('data-form-status', '');
+      formStatus.hidden = true;
+      if (submitButton) {
+        submitButton.insertAdjacentElement('afterend', formStatus);
+      } else {
+        form.appendChild(formStatus);
+      }
+    }
+
+    formStatus.setAttribute('role', 'status');
+    formStatus.setAttribute('aria-live', 'polite');
+    formStatus.setAttribute('aria-atomic', 'true');
+
+    function setFormState(state, message) {
+      form.classList.toggle('form--submitting', state === 'pending');
+      form.classList.toggle('form--success', state === 'success');
+      form.classList.toggle('form--error', state === 'error');
+      form.setAttribute('aria-busy', state === 'pending' ? 'true' : 'false');
+
+      if (submitButton) {
+        submitButton.disabled = state === 'pending';
+        submitButton.textContent = state === 'pending' ? 'Отправляем…' : originalSubmitText;
+      }
+
+      formStatus.hidden = !message;
+      formStatus.textContent = message || '';
+      formStatus.setAttribute('data-state', state || 'idle');
+      formStatus.setAttribute('aria-live', state === 'error' ? 'assertive' : 'polite');
+    }
+
+    function getFormspreeError(response) {
+      return response.json().then(function (payload) {
+        if (payload && Array.isArray(payload.errors) && payload.errors.length) {
+          return payload.errors.map(function (error) {
+            return error.message;
+          }).filter(Boolean).join(' ');
+        }
+        return '';
+      }).catch(function () {
+        return '';
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        form.reportValidity();
+        return;
+      }
+
+      if (isDemo) {
+        e.preventDefault();
+        setFormState('error', 'Форма ещё не подключена. Укажите действующий Formspree ID в атрибуте action.');
+        return;
+      }
+
+      // Без fetch/FormData остаётся штатная отправка HTML-формы на Formspree.
+      if (!isFormspree || !window.fetch || !window.FormData) return;
+
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      isSubmitting = true;
+      setFormState('pending', 'Отправляем заявку…');
+
+      var submittedTopic = topicSelect ? topicSelect.value : 'general';
+      var requestController = null;
+      var requestTimeoutId = null;
+      var requestTimedOut = false;
+      var fetchOptions = {
+        method: (form.getAttribute('method') || 'POST').toUpperCase(),
+        body: new FormData(form),
+        headers: {
+          Accept: 'application/json'
+        }
+      };
+
+      if (typeof window.AbortController === 'function') {
+        requestController = new window.AbortController();
+        fetchOptions.signal = requestController.signal;
+        requestTimeoutId = window.setTimeout(function () {
+          requestTimedOut = true;
+          requestController.abort();
+        }, FORM_SUBMIT_TIMEOUT_MS);
+      }
+
+      window.fetch(action, fetchOptions).then(function (response) {
+        if (response.ok) {
+          form.reset();
+          setFormState('success', 'Спасибо! Заявка отправлена. Свяжемся с вами в ближайшее время.');
+          sendYmGoal('lead_form_success', {
+            topic: submittedTopic,
+            source_path: window.location.pathname
+          });
+          return;
+        }
+
+        return getFormspreeError(response).then(function (details) {
+          throw new Error(details || 'Не удалось отправить заявку. Проверьте данные и попробуйте ещё раз.');
+        });
+      }).catch(function (error) {
+        setFormState(
+          'error',
+          requestTimedOut
+            ? 'Сервер не ответил за 3 секунды. Попробуйте отправить заявку ещё раз.'
+            : error && error.message
+            ? error.message
+            : 'Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.'
+        );
+      }).finally(function () {
+        if (requestTimeoutId !== null) {
+          window.clearTimeout(requestTimeoutId);
+        }
+        isSubmitting = false;
+        if (form.classList.contains('form--submitting')) {
+          setFormState('idle', '');
+        }
+      });
     });
   }
 })();

@@ -3,34 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Согласие на обработку персональных данных | ВЧ — студия Владислава Червякова</title>
-  <meta name="description" content="Согласие на обработку персональных данных при отправке формы на сайте ВЧ — студия Владислава Червякова (vch-tech.com).">
+  <title>Согласие на обработку персональных данных | Студия Владислава Червякова</title>
+  <meta name="description" content="Согласие на обработку персональных данных при отправке формы на сайте Студии Владислава Червякова (vch-tech.com).">
   <link rel="canonical" href="https://www.vch-tech.com/consent.html">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#2563eb">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260924f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 </head>
 <body class="legal-page">
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
   <header class="header header--scrolled" id="header">
     <div class="header__inner">
-      <a href="index.html" class="logo">В<span class="logo-accent">Ч</span></a>
+      <a href="index.html" class="logo" aria-label="Студия Владислава Червякова — на главную"><span class="logo__mark">В<span class="logo-accent">Ч</span></span><span class="logo__name">Студия Владислава Червякова</span></a>
       <div class="header__actions">
-        <nav class="nav nav--case" id="nav">
+        <nav class="nav nav--case" id="nav" aria-label="Основная навигация">
           <a href="index.html">Главная</a>
-          <a href="index.html#contacts">Контакты</a>
+          <a href="contacts.html">Контакты</a>
         </nav>
         <div class="header__tools">
           <a href="tel:+79959663319" class="header__phone" aria-label="Позвонить +7 995 966-33-19" title="Позвонить">
             <svg class="header__phone-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
           </a>
-          <a href="index.html#contacts" class="btn btn--primary header__cta">Связаться</a>
+          <a href="contacts.html" class="btn btn--primary header__cta">Связаться</a>
         </div>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" type="button" aria-expanded="false" aria-controls="nav">
         <span></span>
         <span></span>
         <span></span>
@@ -38,20 +39,20 @@
     </div>
   </header>
 
-  <main class="legal">
+  <main class="legal" id="main-content" tabindex="-1">
     <div class="container">
-      <nav class="legal__breadcrumb" aria-label="Навигация">
+      <nav class="legal__breadcrumb" aria-label="Хлебные крошки">
         <a href="index.html">Главная</a>
         <span aria-hidden="true">/</span>
         <span>Согласие на обработку данных</span>
       </nav>
       <h1 class="legal__title">Согласие на обработку персональных данных</h1>
-      <p class="legal__date">Редакция от 22 мая 2026 года</p>
-      <p class="legal__lead">Настоящий документ определяет условия, на которых пользователь сайта <a href="https://www.vch-tech.com/">vch-tech.com</a> (ВЧ — студия Владислава Червякова) даёт согласие оператору <strong>Червякову Владиславу Андреевичу</strong> на обработку персональных данных, передаваемых через форму обратной связи.</p>
+      <p class="legal__date">Редакция от 22 сентября 2026 года</p>
+      <p class="legal__lead">Настоящий документ определяет условия, на которых пользователь сайта <a href="https://www.vch-tech.com/">vch-tech.com</a> (Студия Владислава Червякова) даёт согласие оператору <strong>Червякову Владиславу Андреевичу</strong> на обработку персональных данных, передаваемых через форму обратной связи.</p>
 
       <section class="legal__section">
         <h2>1. Оператор и форма</h2>
-        <p>Согласие даётся при отправке формы на странице <a href="index.html#contacts">контактов</a>. Обязательные поля: имя и телефон. Поля «Email» и «Сообщение» заполняются по желанию.</p>
+        <p>Согласие даётся при отправке формы на <a href="index.html#contacts">главной странице</a> или <a href="contacts.html">странице выбора темы обращения</a>. Обязательные поля: имя и телефон, а на странице выбора темы — также тема обращения. Поля «Email» и «Сообщение» заполняются по желанию.</p>
         <p>Данные формы передаются оператору через сервис <strong>Formspree</strong> (formspree.io) по защищённому соединению. Подробности — в <a href="privacy.html">Политике конфиденциальности</a>.</p>
       </section>
 
@@ -63,6 +64,7 @@
           <li>номер контактного телефона;</li>
           <li>адрес электронной почты (если указан);</li>
           <li>текст сообщения (если указан);</li>
+          <li>тему обращения (если выбрана);</li>
           <li>технические сведения о запросе, необходимые для доставки заявки и защиты формы от спама (в том числе обрабатываемые Formspree).</li>
         </ul>
         <p>Использование cookie и веб-аналитики Яндекс.Метрика регулируется отдельно — выбором в cookie banner на сайте и разделом о cookie в <a href="privacy.html">Политике конфиденциальности</a>. Настоящее Согласие не заменяет согласие на аналитические cookie: счётчик подключается только при нажатии «Принять».</p>
@@ -105,7 +107,7 @@
 
       <section class="legal__section">
         <h2>7. Подтверждение согласия</h2>
-        <p>Нажимая кнопку «Отправить» в форме на сайте, пользователь подтверждает, что:</p>
+        <p>Нажимая кнопку отправки формы на сайте, пользователь подтверждает, что:</p>
         <ul>
           <li>ознакомился с настоящим Согласием и <a href="privacy.html">Политикой конфиденциальности</a>;</li>
           <li>даёт согласие на обработку указанных персональных данных на изложенных условиях;</li>
@@ -117,7 +119,7 @@
         <h2>8. Контакты оператора</h2>
         <p>По вопросам обработки персональных данных:</p>
         <ul class="legal__contacts">
-          <li>Оператор: Червяков Владислав Андреевич (ВЧ — студия Владислава Червякова)</li>
+          <li>Оператор: Червяков Владислав Андреевич</li>
           <li>Email: <a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li>
           <li>Телефон: <a href="tel:+79959663319">+7 995 966-33-19</a></li>
           <li>Telegram: <a href="https://t.me/skbarawork" target="_blank" rel="noopener">@skbarawork</a></li>
@@ -131,7 +133,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <a href="index.html" class="footer__logo">В<span class="logo-accent">Ч</span></a>
-          <p class="footer__tagline">ВЧ — студия Владислава Червякова. Экспресс-аудит, внедрение, модули, интеграции и сопровождение без правок core Odoo.</p>
+          <p class="footer__tagline">Студия Владислава Червякова. Экспресс-аудит, внедрение, модули, интеграции и сопровождение без правок core Odoo.</p>
         </div>
         <nav class="footer__col" aria-label="Навигация по сайту">
           <h3 class="footer__col-title">Навигация</h3>
@@ -143,7 +145,7 @@
             <li><a href="index.html#projects">Кейсы</a></li>
             <li><a href="index.html#team">Команда</a></li>
             <li><a href="index.html#faq">FAQ</a></li>
-            <li><a href="index.html#contacts">Контакты</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
         <nav class="footer__col" aria-label="Кейсы">
@@ -159,14 +161,14 @@
             <li><a href="https://t.me/skbarawork" target="_blank" rel="noopener">Telegram @skbarawork</a></li>
             <li><a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li>
             <li><a href="tel:+79959663319">+7 995 966-33-19</a></li>
-            <li><a href="index.html#contacts">Форма заявки</a></li>
+            <li><a href="contacts.html">Форма заявки</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-        <p class="footer__copy">© 2026 ВЧ — студия Владислава Червякова. Все права защищены.</p>
+        <p class="footer__copy">© 2026 Студия Владислава Червякова. Все права защищены.</p>
         <nav class="footer__legal" aria-label="Юридическая информация">
           <a href="privacy.html">Политика конфиденциальности</a>
           <a href="consent.html" aria-current="page">Согласие на обработку данных</a>
@@ -175,7 +177,7 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden>
+  <div class="cookie-banner" id="cookieBanner" role="region" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden>
     <div class="cookie-banner__inner container">
       <p class="cookie-banner__text" id="cookieBannerDesc">
         <span id="cookieBannerTitle" class="visually-hidden">Уведомление о cookie</span>
@@ -190,6 +192,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260924f"></script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Atkinternal: планирование ресурсов в Telegram и Odoo</title>
+  <desc id="desc">Условная схема календарных слотов и Telegram-бота без данных сотрудников.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eaf1ff"/><stop offset="1" stop-color="#f8f9fb"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="15" stdDeviation="20" flood-color="#173f85" flood-opacity=".11"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="83" cy="70" r="175" fill="#dbeafe" opacity=".48"/><circle cx="1120" cy="624" r="185" fill="#dbeafe" opacity=".5"/>
+  <g filter="url(#shadow)"><rect x="80" y="132" width="530" height="410" rx="27" fill="#fff"/><rect x="766" y="61" width="340" height="552" rx="37" fill="#fff"/></g>
+  <g font-family="Arial,sans-serif">
+    <rect x="109" y="159" width="472" height="63" rx="13" fill="#f2f7ff"/>
+    <circle cx="144" cy="190" r="18" fill="#dbeafe"/><path d="M137 185h14M137 192h14M137 199h9" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="176" y="199" fill="#1a1a1f" font-size="26" font-weight="700">Odoo</text>
+    <text x="108" y="267" fill="#64748b" font-size="19">Планирование ресурсов</text>
+    <g fill="#f8faff" stroke="#dfe9f9"><rect x="109" y="293" width="472" height="218" rx="14"/><path d="M109 343h472M109 399h472M109 455h472M195 293v218M272 293v218M349 293v218M426 293v218M503 293v218"/></g>
+    <rect x="204" y="360" width="136" height="23" rx="9" fill="#bfdbfe"/><rect x="357" y="416" width="137" height="23" rx="9" fill="#60a5fa"/><rect x="280" y="472" width="131" height="23" rx="9" fill="#93c5fd"/>
+    <circle cx="827" cy="101" r="16" fill="#dbeafe"/><text x="859" y="108" fill="#1a1a1f" font-size="23" font-weight="700">Telegram</text>
+    <path d="M801 132h269" stroke="#dbe5f3" stroke-width="2"/>
+    <rect x="799" y="170" width="269" height="71" rx="15" fill="#eff6ff"/>
+    <text x="821" y="214" fill="#1a1a1f" font-size="21" font-weight="700">Слоты</text>
+    <rect x="799" y="258" width="269" height="71" rx="15" fill="#eff6ff"/>
+    <text x="821" y="302" fill="#1a1a1f" font-size="21" font-weight="700">Свободные ресурсы</text>
+    <rect x="830" y="359" width="238" height="57" rx="14" fill="#dbeafe"/>
+    <text x="949" y="395" text-anchor="middle" fill="#2563eb" font-size="20" font-weight="700">Создать слот</text>
+    <rect x="830" y="429" width="238" height="57" rx="14" fill="#dbeafe"/>
+    <text x="949" y="465" text-anchor="middle" fill="#2563eb" font-size="20" font-weight="700">Изменить слот</text>
+    <rect x="830" y="499" width="238" height="57" rx="14" fill="#dbeafe"/>
+    <text x="949" y="535" text-anchor="middle" fill="#2563eb" font-size="20" font-weight="700">Свободные</text>
+  </g>
+  <path d="M636 341h91m-16-16 16 16-16 16" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,10 +1,11 @@
-# ВЧ — студия Odoo (Студия Владислава Червякова)
+# Студия Владислава Червякова
 
-> Небольшая студия Odoo в России: экспресс-аудит (главный вход), внедрение с нуля или из Excel/Google Таблиц, кастомные модули, интеграции и сопровождение на Odoo Community. Odoo 17/18/19, Python, ERP/WMS.
+> Команда студии в России внедряет и развивает Odoo: бесплатный экспресс-аудит, проектирование, кастомные модули, интеграции и сопровождение на Odoo Community. Odoo 17/18/19, Python, ERP/WMS.
 
 ## Canonical
 
 - Website: https://www.vch-tech.com/
+- Contact and audit sign-up: https://www.vch-tech.com/contacts.html
 - Extended profile (plain text): https://www.vch-tech.com/about.txt
 - Sitemap: https://www.vch-tech.com/sitemap.xml
 - Privacy policy: https://www.vch-tech.com/privacy.html
@@ -12,37 +13,34 @@
 
 ## Main page sections (anchors)
 
-- #pains — typical client situations (no Odoo yet, Excel/Sheets, integrations, MVP, support)
-- #results — measurable outcomes from projects
+- #projects — case studies shown early as evidence of delivered work
+- #pains — typical client situations (new implementation, existing Odoo, integrations and support)
+- #services — service list
 - #process — work approach: diagnosis → analysis → target model → plan → delivery
 - #express-audit — primary entry product: express audit
-- #services — service list
-- #projects — case study links and project highlights
 - #team — studio roles, founder, partners
 - #faq — frequently asked questions
 - #contacts — contact form and Telegram / phone / email
 
-## Case studies
-
-- Buildflow ERP (Odoo 17 MVP): https://www.vch-tech.com/cases/buildflow.html
-- Sync between two Odoo instances: https://www.vch-tech.com/cases/sync-odoo.html
-
 ## Organization
 
-- Name: ВЧ — студия Odoo
-- Alternate name: Студия Владислава Червякова
+- Name: Студия Владислава Червякова
 - Founder: Червяков Владислав (Odoo architect)
+- Delivery: studio team; the founder is responsible for solution architecture and client outcomes
 - Location: Russia (remote-friendly)
 - Languages: Russian (native), English (working)
 
 ## Summary
 
-Студия помогает перевести операционку в Odoo — с нуля, из таблиц или при доработке существующей системы. Экспресс-аудит фиксирует процессы, риски и следующий шаг без «пустого» sales-call.
+Команда студии внедряет Odoo с нуля и развивает существующие системы: проектирует процессы и архитектуру, создаёт модули и интеграции, сопровождает после запуска. Основатель Червяков Владислав отвечает за архитектуру решений и результат. Бесплатный экспресс-аудит завершается кратким ревью и документом с рекомендуемыми следующими шагами.
 
 ## Entry product (primary)
 
-- Экспресс-аудит: for companies with or without Odoo; transition from Excel/Sheets; process map, risks, architecture/MVP hints, next step
-- Sign-up: #contacts form or Telegram @skbarawork
+- Бесплатный экспресс-аудит: для компаний с Odoo и перед внедрением
+- Регламент: первый созвон до 60 минут с вопросами по проекту; после него студия формирует дополнительный список вопросов, а второй этап с ответами и уточнениями обычно занимает ещё около 60 минут
+- Обязательный результат после ответов клиента: краткое ревью и документ с рекомендуемыми следующими шагами; объём документа зависит от задачи и исходных материалов
+- Возможный дополнительный результат: предварительная оценка работ при достаточности данных либо рекомендация глубокого платного аудита
+- Sign-up: https://www.vch-tech.com/contacts.html?topic=audit or Telegram @skbarawork
 
 ## Services
 
@@ -54,12 +52,31 @@
 - Техническая поддержка и развитие после запуска
 - Масштабирование после MVP
 
+Service pages:
+- https://www.vch-tech.com/services/odoo-audit.html
+- https://www.vch-tech.com/services/odoo-implementation.html
+- Разработка модулей Odoo: https://www.vch-tech.com/services/odoo-custom-modules.html
+- https://www.vch-tech.com/services/odoo-integrations.html
+- https://www.vch-tech.com/services/odoo-support.html
+- https://www.vch-tech.com/services/excel-to-odoo.html
+
 ## Selected results
 
 - Buildflow MVP (Odoo 17): registries, roles, dashboard; moved off Google Sheets
-- Odoo sync: incidents ~15/week → 3–4/week at high daily volume
-- Excel/CSV import: 100–200 line orders ~1–2h → ~5 min
 - Modular architecture for handoff to client or other teams
+
+## Separate founder experience across kt.team projects
+
+- Chervyakov Vladislav developed Odoo-to-Odoo synchronization for SPL while employed at kt.team; incidents fell from ~15/week to 3–4/week at high daily volume.
+- In another kt.team project, he built Excel/CSV order import: 100–200 lines took ~5 minutes instead of 1–2 hours of manual work.
+
+## Case studies
+
+- Buildflow ERP on Odoo 17: https://www.vch-tech.com/cases/buildflow.html
+- Buildflow financial reports from Odoo in Telegram: managers can check current projects from a phone, reconcile data more often, and notice inconsistencies earlier: https://www.vch-tech.com/cases/buildflow-telegram.html
+- SPL (ЗАПЧАСТЬ.РФ): Odoo-to-Odoo synchronization for a planned Dubai store, delivered by Chervyakov Vladislav while at kt.team: https://www.vch-tech.com/cases/sync-odoo.html
+- Tridoks: architecture of all integrations, Odoo support, store and Stripe integration (ongoing): https://www.vch-tech.com/cases/tridoks.html
+- Atkinternal staff availability and planning via Odoo and Telegram: https://www.vch-tech.com/cases/atkinternal.html
 
 ## FAQ (short)
 
@@ -74,17 +91,19 @@
 - Telegram: https://t.me/skbarawork (@skbarawork) — preferred
 - Email: skbarawork@gmail.com
 - Phone: +7-995-966-33-19
-- Web form (#contacts): required name + phone
+- Web form: https://www.vch-tech.com/contacts.html (topic, name and phone required)
 
 ## Team
 
-- Владислав Червяков — founder, Odoo architect
+The studio team delivers projects. Founder Chervyakov Vladislav is accountable for solution architecture and outcomes.
+
+- Червяков Владислав — founder, Odoo architect
 - Бобров Семен — Odoo development, support
-- Червяков Александр — Bitrix24 CRM, telephony/social, web
+- Александр Белый — Bitrix24 CRM, telephony/social, web
 
 ## Last updated
 
-2026-05-22
+2026-09-24
 
 ## Founder links
 
