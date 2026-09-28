@@ -329,7 +329,7 @@
   }
 
   function setActiveNav() {
-    if (!nav) return;
+    if (!nav || !document.getElementById('hero')) return;
     var scrollY = window.pageYOffset;
     var activeId = 'hero';
     var offset = 120;
@@ -348,8 +348,10 @@
       var id = href === '#' ? 'hero' : href.slice(1);
       if (id === highlightId) {
         navLinks[i].classList.add('is-active');
+        navLinks[i].setAttribute('aria-current', 'location');
       } else {
         navLinks[i].classList.remove('is-active');
+        navLinks[i].removeAttribute('aria-current');
       }
     }
   }

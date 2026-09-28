@@ -1629,6 +1629,8 @@ body.cookie-banner-visible { padding-bottom: var(--cookie-banner-space, 6.5rem);
   .header__actions {
     display: none;
     width: 100%;
+    max-height: calc(100vh - 4rem);
+    max-height: calc(100dvh - 4rem);
     order: 3;
     flex-direction: column;
     gap: 0.5rem;
@@ -1636,6 +1638,8 @@ body.cookie-banner-visible { padding-bottom: var(--cookie-banner-space, 6.5rem);
     transform: none;
     padding: 0.75rem 0 0.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .header--menu-open .header__actions {
     display: flex;
@@ -1830,18 +1834,8 @@ body.cookie-banner-visible { padding-bottom: var(--cookie-banner-space, 6.5rem);
 }
 
 /* ===== Case study pages (/cases/) ===== */
-.case-page .nav--case a {
-  width: auto;
-  min-width: 4.1rem;
-  padding-left: 0.35rem;
-  padding-right: 0.35rem;
-  white-space: nowrap;
-}
 .case-page .header__actions {
   transform: none;
-}
-.case-page .nav--case {
-  gap: 1.25rem;
 }
 .legal-page .header__actions {
   transform: none;
