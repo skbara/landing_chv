@@ -2255,6 +2255,7 @@ body.cookie-banner-visible { padding-bottom: var(--cookie-banner-space, 6.5rem);
 }
 .blog-card:hover .blog-card__media img { transform: scale(1.02); }
 .blog-card--featured .blog-card__media { height: 100%; aspect-ratio: auto; }
+.blog-card--featured .blog-card__media img { object-fit: contain; }
 .blog-card__content {
   display: flex;
   flex: 1;
