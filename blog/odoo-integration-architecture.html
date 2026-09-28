@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Архитектура интеграции Odoo: очереди и данные | ВЧ</title>
+  <meta name="description" content="Как проектировать интеграцию Odoo: владелец данных, направления обмена, сопоставление, внешние идентификаторы, очереди и восстановление после ошибок.">
+  <meta name="author" content="Владислав Червяков">
+  <link rel="canonical" href="https://www.vch-tech.com/blog/odoo-integration-architecture.html">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Студия Владислава Червякова">
+  <meta property="og:title" content="Архитектура интеграции Odoo: данные, очереди и ошибки">
+  <meta property="og:description" content="Практический разбор владельцев данных, направлений обмена, идентификаторов, очередей и восстановления интеграций Odoo.">
+  <meta property="og:url" content="https://www.vch-tech.com/blog/odoo-integration-architecture.html">
+  <meta property="og:image" content="https://www.vch-tech.com/images/blog/odoo-integration-architecture.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Схема интеграции двух систем через очередь с двусторонним обменом и восстановлением операций">
+  <meta property="article:section" content="Интеграции и архитектура">
+  <meta property="article:author" content="Владислав Червяков">
+  <meta property="article:published_time" content="2026-09-28">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Архитектура интеграции Odoo: данные, очереди и ошибки">
+  <meta name="twitter:description" content="Как определить владельца данных, направления, идентификаторы, очередь и восстановление до разработки интеграции Odoo.">
+  <meta name="twitter:image" content="https://www.vch-tech.com/images/blog/odoo-integration-architecture.png">
+  <meta name="twitter:image:alt" content="Схема интеграции двух систем через очередь с двусторонним обменом и восстановлением операций">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css?v=20260928c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#webpage",
+        "url": "https://www.vch-tech.com/blog/odoo-integration-architecture.html",
+        "name": "Архитектура интеграции Odoo: очереди и данные | ВЧ",
+        "description": "Как проектировать интеграцию Odoo: владелец данных, направления обмена, сопоставление, внешние идентификаторы, очереди и восстановление после ошибок.",
+        "inLanguage": "ru-RU",
+        "isPartOf": {"@id": "https://www.vch-tech.com/blog/#webpage"},
+        "breadcrumb": {"@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#breadcrumb"},
+        "mainEntity": {"@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#article"}
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#article",
+        "url": "https://www.vch-tech.com/blog/odoo-integration-architecture.html",
+        "headline": "Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок",
+        "description": "Практический разбор владельцев данных, направлений обмена, идентификаторов, очередей и восстановления интеграций Odoo.",
+        "inLanguage": "ru-RU",
+        "articleSection": "Интеграции и архитектура",
+        "datePublished": "2026-09-28",
+        "keywords": ["Odoo", "Odoo 18 Community", "архитектура интеграций", "queue_job", "XML-RPC", "external ID"],
+        "author": {"@id": "https://www.vch-tech.com/#person"},
+        "publisher": {"@id": "https://www.vch-tech.com/#organization"},
+        "mainEntityOfPage": {"@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#webpage"},
+        "image": {"@type": "ImageObject", "url": "https://www.vch-tech.com/images/blog/odoo-integration-architecture.png", "width": 1200, "height": 630, "caption": "Схема интеграции двух систем через очередь с двусторонним обменом и восстановлением операций"},
+        "citation": [
+          "https://www.odoo.com/documentation/18.0/developer/reference/external_api.html",
+          "https://github.com/OCA/queue/blob/18.0/queue_job/README.rst",
+          "https://www.vch-tech.com/cases/sync-odoo.html",
+          "https://www.vch-tech.com/cases/tridoks.html"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.vch-tech.com/#person",
+        "name": "Червяков Владислав Андреевич",
+        "url": "https://www.vch-tech.com/",
+        "jobTitle": "Основатель, архитектор Odoo"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.vch-tech.com/#organization",
+        "name": "Студия Владислава Червякова",
+        "url": "https://www.vch-tech.com/",
+        "logo": {"@type": "ImageObject", "url": "https://www.vch-tech.com/images/logo-512.png", "width": 512, "height": 512}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.vch-tech.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.vch-tech.com/blog/"},
+          {"@type": "ListItem", "position": 3, "name": "Архитектура интеграции Odoo", "item": "https://www.vch-tech.com/blog/odoo-integration-architecture.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="case-page article-page">
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <header class="header header--scrolled" id="header">
+    <div class="header__inner">
+      <a href="../index.html" class="logo" aria-label="Студия Владислава Червякова — на главную"><span class="logo__mark">В<span class="logo-accent">Ч</span></span><span class="logo__name">Студия Владислава Червякова</span></a>
+      <div class="header__actions">
+        <nav class="nav" id="nav" aria-label="Основная навигация"><a href="./" class="is-active" aria-current="location">Блог</a><a href="../cases/">Кейсы</a><a href="../services/">Услуги</a><a href="../index.html#process">Подход</a><a href="../services/odoo-audit.html">Аудит</a><a href="../contacts.html">Контакты</a></nav>
+        <div class="header__tools"><a href="tel:+79959663319" class="header__phone" aria-label="Позвонить +7 995 966-33-19" title="Позвонить"><svg class="header__phone-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a><a href="../contacts.html" class="btn btn--primary header__cta">Связаться</a></div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav" type="button"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <article>
+      <header class="case-hero article-hero">
+        <div class="case-hero__inner">
+          <nav class="case-breadcrumb" aria-label="Хлебные крошки"><a href="../index.html">Главная</a><span class="case-breadcrumb__sep" aria-hidden="true">/</span><a href="./">Блог</a><span class="case-breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Архитектура интеграции</span></nav>
+          <p class="case-hero__label">Интеграции и архитектура</p>
+          <h1 class="case-hero__title">Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок</h1>
+          <p class="case-hero__lead">Надёжная интеграция начинается не с первого API-вызова, а с определения владельца данных, направления обмена, сопоставления данных (mapping), идентификаторов и поведения при ошибке. API, очередь или cron реализуют уже согласованный контракт между системами. Очередь полезна для долгих и восстанавливаемых операций, но не обязательна для каждого обмена.</p>
+          <dl class="article-meta">
+            <div><dt>Автор</dt><dd>Владислав Червяков</dd></div>
+            <div><dt>Опубликовано</dt><dd><time datetime="2026-09-28">28 сентября 2026</time></dd></div>
+            <div><dt>Применимость</dt><dd>Концептуальные принципы; SPL — Odoo 18 Community, Tridoks — Odoo 19 Enterprise</dd></div>
+          </dl>
+        </div>
+      </header>
+
+      <div class="section section--article">
+        <div class="container article-shell">
+          <nav class="article-toc" aria-label="Содержание статьи">
+            <p class="article-toc__title">Содержание</p>
+            <ol>
+              <li><a href="#short-answer">Краткий ответ</a></li>
+              <li><a href="#before-development">До разработки</a></li>
+              <li><a href="#sync-async">Синхронно или асинхронно</a></li>
+              <li><a href="#contour">Интеграционный контур</a></li>
+              <li><a href="#spl-example">Пример SPL</a></li>
+              <li><a href="#reliability">Надёжность</a></li>
+              <li><a href="#tridoks-example">Пример Tridoks</a></li>
+              <li><a href="#sources">Источники</a></li>
+            </ol>
+          </nav>
+
+          <div class="article-content">
+            <section id="short-answer">
+              <h2>Краткий ответ</h2>
+              <div class="article-callout article-callout--answer">
+                <p>Сначала зафиксируйте, какая система владеет каждым объектом, кто создаёт и изменяет запись, как связываются идентификаторы и что происходит при конфликте или недоступности одной стороны. Затем выберите способ доставки: синхронный вызов, очередь или регламентное задание. Интеграцию стоит считать управляемой, когда сбой можно обнаружить, связать с конкретной операцией, диагностировать и безопасно обработать повторно.</p>
+              </div>
+              <div class="article-callout article-callout--fact">
+                <h3>Применимость</h3>
+                <p>Основные принципы статьи не привязаны к одной версии Odoo. SPL работал на Odoo 18 Community: поведение XML-RPC сверено с <a href="https://www.odoo.com/documentation/18.0/developer/reference/external_api.html" target="_blank" rel="noopener noreferrer">официальной документацией Odoo 18</a>, а работа очереди — с документацией OCA <code>queue_job</code> 18.0. Пример Tridoks относится к Odoo 19 Enterprise.</p>
+              </div>
+            </section>
+
+            <section id="before-development">
+              <h2>Что определить до разработки</h2>
+              <p>Это инженерный подход автора, а не встроенное правило Odoo. Он нужен, чтобы код интеграции не принимал неявные решения о данных.</p>
+              <dl class="article-definitions">
+                <div><dt>Источник истины (source of truth)</dt><dd>Система, чьё значение считается исходным при расхождении.</dd></div>
+                <div><dt>Направление обмена</dt><dd>Односторонняя или двусторонняя передача и события, которые запускают обмен.</dd></div>
+                <div><dt>Владелец данных (ownership)</dt><dd>Граница ответственности: где объект создаётся, изменяется и закрывается.</dd></div>
+                <div><dt>Сопоставление данных (mapping)</dt><dd>Соответствие моделей, полей, единиц измерения, статусов и справочников.</dd></div>
+                <div><dt>Внешний идентификатор (external reference)</dt><dd>Устойчивая связь локальной записи с объектом во внешней системе.</dd></div>
+                <div><dt>Правило разрешения конфликтов</dt><dd>Порядок обработки параллельных изменений, устаревших событий и неполных данных.</dd></div>
+              </dl>
+              <div class="article-callout article-callout--recommendation">
+                <h3>Рекомендация автора</h3>
+                <p>Описывайте контракт обмена таблицей до разработки. Если для объекта нельзя назвать владельца, направление и идентификатор, реализация почти неизбежно перенесёт этот выбор в код и усложнит разбор ошибок.</p>
+              </div>
+            </section>
+
+            <section id="sync-async">
+              <h2>Синхронный и асинхронный обмен</h2>
+              <h3>Когда достаточно синхронного вызова</h3>
+              <p>Синхронный вызов подходит, когда операция короткая, пользователь должен сразу получить результат, обе стороны доступны, а ошибка может быть показана и исправлена в том же сценарии. Пример — проверка небольшого справочника перед сохранением формы.</p>
+              <h3>Когда полезна очередь</h3>
+              <p>Асинхронная обработка помогает разделить пользовательскую операцию и внешний обмен, управлять нагрузкой и хранить состояние отдельных заданий. В <a href="https://github.com/OCA/queue/blob/18.0/queue_job/README.rst" target="_blank" rel="noopener noreferrer">OCA <code>queue_job</code></a> документированы независимые задания, приоритеты и настраиваемые интервалы retry. В SPL механизм на базе <code>queue_job</code> входил в контур обработки ошибок: сбои обнаруживались, а обмен восстанавливался повторной обработкой операций.</p>
+              <p>Очередь не делает операцию безопасной автоматически. Повторяемость зависит от бизнес-операции, внешнего идентификатора, проверки уже созданного результата и обработки частичного выполнения.</p>
+            </section>
+
+            <section id="contour">
+              <h2>Очередь и интеграционный контур</h2>
+              <figure class="architecture-figure" aria-labelledby="generic-contour-caption">
+                <div class="architecture-flow" role="img" aria-label="Исходная система передаёт событие в слой проверки и сопоставления данных. Операция выполняется синхронно либо через очередь, затем Odoo или внешняя система возвращает результат. Ошибка попадает в журнал диагностики и маршрут восстановления.">
+                  <div class="architecture-node"><strong>Исходная система</strong><span>Событие и локальный ID</span></div>
+                  <span class="architecture-arrow" aria-hidden="true">→</span>
+                  <div class="architecture-node"><strong>Проверка и сопоставление</strong><span>Контракт, поля, внешний идентификатор</span></div>
+                  <span class="architecture-arrow" aria-hidden="true">→</span>
+                  <div class="architecture-node architecture-node--accent"><strong>Доставка</strong><span>Синхронный вызов или очередь</span></div>
+                  <span class="architecture-arrow" aria-hidden="true">→</span>
+                  <div class="architecture-node"><strong>Принимающая система</strong><span>Odoo или внешний сервис</span></div>
+                  <div class="architecture-return"><span aria-hidden="true">↩</span> Результат, статус или диагностируемая ошибка</div>
+                </div>
+                <figcaption id="generic-contour-caption">Обобщённый интеграционный контур: способ доставки выбирается после определения владельца данных, сопоставления и поведения при ошибке.</figcaption>
+              </figure>
+
+              <h3>Пример таблицы проектирования</h3>
+              <div class="article-table-wrap" tabindex="0" role="region" aria-label="Пример таблицы проектирования интеграции">
+                <table class="article-table">
+                  <thead><tr><th>Сущность</th><th>Источник</th><th>Получатель</th><th>Идентификатор</th><th>Обработка ошибки</th></tr></thead>
+                  <tbody>
+                    <tr><td>Заказ клиента</td><td>Витрина</td><td>Odoo</td><td>Внешний ID заказа</td><td>Проверить существование результата; ошибку отправить на разбор</td></tr>
+                    <tr><td>Статус исполнения</td><td>Odoo</td><td>Витрина</td><td>Внешний ID заказа</td><td>Повторять после сетевой ошибки только при проверяемом результате</td></tr>
+                    <tr><td>Снимок остатков</td><td>ERP/WMS</td><td>Система-получатель</td><td>Сопоставление товара и склада</td><td>Остановить пакет при несовпадении схемы; исправить сопоставление</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="article-table-note">Это обобщённый пример и рекомендация автора, а не описание SPL или Tridoks.</p>
+            </section>
+
+            <section id="spl-example">
+              <h2>Опыт проекта: контур SPL</h2>
+              <div class="article-callout article-callout--experience">
+                <h3>Атрибуция</h3>
+                <p>Этот опыт получен Владиславом Червяковым во время работы в <a href="https://kt.team/" target="_blank" rel="noopener noreferrer">kt.team</a>. SPL не представлен как клиент текущей студии.</p>
+              </div>
+              <p>Контур включал два экземпляра Odoo 18 Community. Marketplace обслуживал клиентскую часть: заказы покупателей, товары и сайт. Vendor-система отвечала за исполнение заказов поставщиками. Для каждой стороны существовали отдельные модули Odoo, а асинхронный обмен работал через механизм на базе <code>queue_job</code>. В отдельных сценариях использовались REST, RPC и XML-RPC.</p>
+              <p>Двусторонний обмен охватывал заказы, закупки, отгрузки, остатки, сообщения и вложения. Материалы не позволяют восстановить полную матрицу владельцев и направлений для каждой сущности, поэтому ниже приведены только подтверждённые границы.</p>
+              <ul>
+                <li>примерно 100 заказов и закупок в день;</li>
+                <li>примерно 200 отгрузок в день;</li>
+                <li>примерно 500 сообщений и вложений в день.</li>
+              </ul>
+              <p>Для основных синхронизируемых сущностей — заказов, закупок, отгрузок, остатков, сообщений и вложений — использовались внешние идентификаторы, связывающие соответствующие записи двух экземпляров Odoo. Это позволяло находить уже созданный объект при последующей синхронизации и снижать риск повторного создания записей, не означая формальной идемпотентности всего контура.</p>
+              <p>Полный публичный контекст и показатели проекта приведены в <a href="../cases/sync-odoo.html">кейсе синхронизации двух Odoo для SPL</a>.</p>
+            </section>
+
+            <section id="reliability">
+              <h2>Надёжность — это не отсутствие ошибок</h2>
+              <p>Надёжный контур всё равно сталкивается с недоступностью сети, несовместимостью схемы, ошибками данных и изменениями API. Практически важнее, чтобы:</p>
+              <ul>
+                <li>проблема обнаруживалась, а не терялась;</li>
+                <li>операцию можно было идентифицировать;</li>
+                <li>ошибка содержала достаточно контекста для диагностики;</li>
+                <li>существовал проверяемый путь восстановления;</li>
+                <li>повтор не создавал неконтролируемые дубли или повторные бизнес-действия.</li>
+              </ul>
+              <div class="article-callout article-callout--recommendation">
+                <h3>Рекомендация автора</h3>
+                <p>Не называйте задание «безопасно повторяемым» только потому, что оно находится в очереди. Для повторной обработки нужен отдельный ответ: как обнаружить уже созданный объект, какой результат считать завершённым и что делать после частичного выполнения.</p>
+              </div>
+              <p>Практический разбор режимов сбоев продолжен в статье <a href="odoo-integration-error-recovery.html">«Как восстанавливать интеграцию Odoo после сбоев»</a>.</p>
+            </section>
+
+            <section id="tridoks-example">
+              <h2>Опыт проекта: границы Strapi, Odoo и Stripe</h2>
+              <p>В продолжающемся проекте Tridoks внешняя витрина построена на Strapi, центральный ERP-контур — на Odoo 19 Enterprise, а платежи проходят через Stripe. В согласованном контуре витрина передаёт в Odoo клиента, адрес, <code>sale.order</code>, строки заказа и внешний идентификатор платежа. Odoo возвращает витрине статусы заказа и исполнения.</p>
+              <p>Пример показывает границы витрины, ERP и платёжной системы. Проект продолжается; актуальный статус опубликован в <a href="../cases/tridoks.html">кейсе Tridoks</a>.</p>
+            </section>
+
+            <section id="sources">
+              <h2>Источники</h2>
+              <ol class="article-sources">
+                <li><a href="https://www.odoo.com/documentation/18.0/developer/reference/external_api.html" target="_blank" rel="noopener noreferrer">Odoo 18: External API</a> — аутентификация XML-RPC и вызовы методов моделей.</li>
+                <li><a href="https://github.com/OCA/queue/blob/18.0/queue_job/README.rst" target="_blank" rel="noopener noreferrer">OCA queue_job 18.0</a> — задания, retry и требование проектировать повторяемость операций.</li>
+                <li><a href="../cases/sync-odoo.html">Кейс SPL</a> — основной публичный источник проектного контекста и объёмов.</li>
+                <li><a href="../cases/tridoks.html">Кейс Tridoks</a> — статус продолжающегося проекта и границы интеграции.</li>
+              </ol>
+            </section>
+
+            <aside class="article-related" aria-labelledby="related-title">
+              <h2 id="related-title">Связанные материалы</h2>
+              <ul>
+                <li><a href="../services/odoo-integrations.html">Услуга: интеграции Odoo с внешними системами</a></li>
+                <li><a href="../cases/sync-odoo.html">Кейс: синхронизация двух Odoo для SPL</a></li>
+                <li><a href="../cases/tridoks.html">Кейс: Strapi, Odoo 19 Enterprise и Stripe</a></li>
+                <li><a href="odoo-integration-error-recovery.html">Как восстанавливать интеграцию Odoo после сбоев</a></li>
+                <li><a href="odoo-telegram-integration.html">Интеграция Odoo с Telegram</a></li>
+              </ul>
+            </aside>
+
+            <div class="case-cta">
+              <h2 class="case-cta__title">Нужно спроектировать интеграцию Odoo?</h2>
+              <p class="case-cta__text">Опишите системы, объекты обмена и известные ограничения — определим вопросы для технического обследования.</p>
+              <a href="../contacts.html?topic=integration" class="btn btn--primary">Обсудить интеграцию</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__top"><div class="footer__grid">
+      <div class="footer__brand"><a href="../index.html" class="footer__logo" aria-label="Студия Владислава Червякова — главная">В<span class="logo-accent">Ч</span></a><p class="footer__tagline">Студия Владислава Червякова. Внедрение Odoo, модули, интеграции и сопровождение.</p></div>
+      <nav class="footer__col" aria-label="Навигация по сайту"><h2 class="footer__col-title">Навигация</h2><ul class="footer__links"><li><a href="../services/">Услуги</a></li><li><a href="../cases/">Кейсы</a></li><li><a href="./">Блог</a></li><li><a href="../contacts.html">Контакты</a></li></ul></nav>
+      <nav class="footer__col" aria-label="Материалы"><h2 class="footer__col-title">Материалы</h2><ul class="footer__links"><li><a href="odoo-integration-architecture.html" aria-current="page">Архитектура интеграции</a></li><li><a href="odoo-integration-error-recovery.html">Восстановление после сбоев</a></li><li><a href="odoo-telegram-integration.html">Odoo и Telegram</a></li></ul></nav>
+      <div class="footer__col"><h2 class="footer__col-title">Контакты</h2><ul class="footer__links"><li><a href="https://t.me/skbarawork" target="_blank" rel="noopener noreferrer">Telegram @skbarawork</a></li><li><a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li><li><a href="tel:+79959663319">+7 995 966-33-19</a></li></ul></div>
+    </div></div>
+    <div class="footer__bottom"><div class="container footer__bottom-inner"><p class="footer__copy">© 2026 Студия Владислава Червякова. Все права защищены.</p><nav class="footer__legal" aria-label="Юридическая информация"><a href="../privacy.html">Политика конфиденциальности</a><a href="../consent.html">Согласие на обработку данных</a></nav></div></div>
+  </footer>
+  <div class="cookie-banner" id="cookieBanner" role="region" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden><div class="cookie-banner__inner container"><p class="cookie-banner__text" id="cookieBannerDesc"><span id="cookieBannerTitle" class="visually-hidden">Уведомление о cookie</span>Мы используем cookie для корректной работы сайта и оценки посещаемости. Подробнее в <a href="../privacy.html">политике конфиденциальности</a>.</p><div class="cookie-banner__actions"><button type="button" class="btn btn--cookie-essential" id="cookieEssential">Только необходимое</button><button type="button" class="btn btn--primary" id="cookieAccept">Принять</button></div></div></div>
+  <script src="../script.js?v=20260928b"></script>
+</body>
+</html>

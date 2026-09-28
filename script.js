@@ -8,7 +8,7 @@
   var cookieBannerResizeObserver = null;
 
   // Directory URLs are correct for production, where the server resolves
-  // /services/ and /cases/ to index.html. The file protocol has no such
+  // /services/, /cases/ and /blog/ to index.html. The file protocol has no such
   // resolution, so adapt links only for direct local previews.
   function enableLocalFileNavigation() {
     if (window.location.protocol !== 'file:') return;
@@ -31,7 +31,7 @@
         href = 'index.html';
       }
 
-      href = href.replace(/(^|\/)(services|cases)\/$/, '$1$2/index.html');
+      href = href.replace(/(^|\/)(services|cases|blog)\/$/, '$1$2/index.html');
       links[i].setAttribute('href', href);
     }
   }

@@ -60,6 +60,13 @@ Service pages:
 - https://www.vch-tech.com/services/odoo-support.html
 - https://www.vch-tech.com/services/excel-to-odoo.html
 
+## Technical articles
+
+- Blog hub: https://www.vch-tech.com/blog/
+- Integration architecture: ownership, data flows, queue_job and recovery boundaries: https://www.vch-tech.com/blog/odoo-integration-architecture.html
+- Integration error recovery: failure taxonomy, retry, replay, reconciliation and sanitized SPL incidents: https://www.vch-tech.com/blog/odoo-integration-error-recovery.html
+- Odoo + Telegram: reporting/read and operational/write patterns using Buildflow and Atkinternal: https://www.vch-tech.com/blog/odoo-telegram-integration.html
+
 ## Selected results
 
 - Buildflow MVP (Odoo 17): registries, roles, dashboard; moved off Google Sheets
@@ -103,7 +110,7 @@ The studio team delivers projects. Founder Chervyakov Vladislav is accountable f
 
 ## Last updated
 
-2026-09-24
+2026-09-28
 
 ## Founder links
 

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практический блог об Odoo и интеграциях | Студия ВЧ</title>
+  <meta name="description" content="Практические материалы студии об архитектуре интеграций Odoo, восстановлении после сбоев и безопасных сценариях работы Odoo с Telegram.">
+  <link rel="canonical" href="https://www.vch-tech.com/blog/">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Студия Владислава Червякова">
+  <meta property="og:title" content="Практический блог об Odoo и интеграциях">
+  <meta property="og:description" content="Архитектура интеграций Odoo, восстановление после ошибок и проверенные сценарии Odoo с Telegram без маркетинговой воды.">
+  <meta property="og:url" content="https://www.vch-tech.com/blog/">
+  <meta property="og:image" content="https://www.vch-tech.com/images/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ВЧ — знак Студии Владислава Червякова">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Практический блог об Odoo и интеграциях">
+  <meta name="twitter:description" content="Технические материалы об интеграциях, очередях, восстановлении после ошибок и Telegram-сценариях для Odoo.">
+  <meta name="twitter:image" content="https://www.vch-tech.com/images/og-cover.png">
+  <meta name="twitter:image:alt" content="ВЧ — знак Студии Владислава Червякова">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css?v=20260928c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.vch-tech.com/blog/#webpage",
+        "url": "https://www.vch-tech.com/blog/",
+        "name": "Практический блог об Odoo и интеграциях | Студия ВЧ",
+        "description": "Практические материалы студии об архитектуре интеграций Odoo, восстановлении после сбоев и безопасных сценариях работы Odoo с Telegram.",
+        "inLanguage": "ru-RU",
+        "isPartOf": {"@id": "https://www.vch-tech.com/#website"},
+        "breadcrumb": {"@id": "https://www.vch-tech.com/blog/#breadcrumb"},
+        "mainEntity": {"@id": "https://www.vch-tech.com/blog/#articles"}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.vch-tech.com/blog/#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.vch-tech.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.vch-tech.com/blog/"}
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://www.vch-tech.com/blog/#articles",
+        "name": "Материалы об интеграциях и архитектуре Odoo",
+        "numberOfItems": 3,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "BlogPosting",
+              "@id": "https://www.vch-tech.com/blog/odoo-integration-architecture.html#article",
+              "headline": "Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок",
+              "url": "https://www.vch-tech.com/blog/odoo-integration-architecture.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "BlogPosting",
+              "@id": "https://www.vch-tech.com/blog/odoo-integration-error-recovery.html#article",
+              "headline": "Как восстанавливать интеграцию Odoo после сбоев",
+              "url": "https://www.vch-tech.com/blog/odoo-integration-error-recovery.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "BlogPosting",
+              "@id": "https://www.vch-tech.com/blog/odoo-telegram-integration.html#article",
+              "headline": "Интеграция Odoo с Telegram: отчёты и операционные сценарии",
+              "url": "https://www.vch-tech.com/blog/odoo-telegram-integration.html"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="case-page blog-page">
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <header class="header header--scrolled" id="header">
+    <div class="header__inner">
+      <a href="../index.html" class="logo" aria-label="Студия Владислава Червякова — на главную"><span class="logo__mark">В<span class="logo-accent">Ч</span></span><span class="logo__name">Студия Владислава Червякова</span></a>
+      <div class="header__actions">
+        <nav class="nav" id="nav" aria-label="Основная навигация">
+          <a href="./" class="is-active" aria-current="page">Блог</a>
+          <a href="../cases/">Кейсы</a>
+          <a href="../services/">Услуги</a>
+          <a href="../index.html#process">Подход</a>
+          <a href="../services/odoo-audit.html">Аудит</a>
+          <a href="../contacts.html">Контакты</a>
+        </nav>
+        <div class="header__tools">
+          <a href="tel:+79959663319" class="header__phone" aria-label="Позвонить +7 995 966-33-19" title="Позвонить"><svg class="header__phone-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+          <a href="../contacts.html" class="btn btn--primary header__cta">Связаться</a>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav" type="button"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <header class="case-hero">
+      <div class="case-hero__inner">
+        <nav class="case-breadcrumb" aria-label="Хлебные крошки">
+          <a href="../index.html">Главная</a><span class="case-breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Блог</span>
+        </nav>
+        <p class="case-hero__label">Odoo knowledge base</p>
+        <h1 class="case-hero__title">Практические материалы по Odoo</h1>
+        <p class="case-hero__lead">Разбираем архитектуру интеграций, эксплуатационные ошибки и технические решения на основе документации и подтверждённого проектного опыта. Материалы отделяют факты о платформе, опыт конкретных проектов и инженерные рекомендации автора.</p>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="integration-articles-title">
+      <div class="container">
+        <p class="section__subtitle">Integrations &amp; Architecture</p>
+        <h2 class="section__title" id="integration-articles-title">Интеграции и архитектура</h2>
+        <div class="section__line" aria-hidden="true"></div>
+        <p class="section__lead">Первый кластер посвящён границам систем, очередям, восстановлению после ошибок и двум разным способам использовать Telegram рядом с Odoo.</p>
+        <div class="blog-grid">
+          <article class="blog-card blog-card--featured">
+            <p class="blog-card__eyebrow">Архитектура</p>
+            <h3><a href="odoo-integration-architecture.html">Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок</a></h3>
+            <p>Как определить владельца данных, направления обмена, идентификаторы и поведение при ошибках до начала разработки API.</p>
+            <p class="blog-card__meta">Концептуальные принципы · примеры SPL и Tridoks</p>
+            <a class="blog-card__link" href="odoo-integration-architecture.html">Читать материал →</a>
+          </article>
+          <article class="blog-card">
+            <p class="blog-card__eyebrow">Эксплуатация</p>
+            <h3><a href="odoo-integration-error-recovery.html">Как восстанавливать интеграцию Odoo после сбоев</a></h3>
+            <p>Классификация сбоев, безопасный retry, replay и reconciliation, а также два обезличенных сбоя queue_job/XML-RPC.</p>
+            <p class="blog-card__meta">Концептуальный разбор · проектный пример SPL</p>
+            <a class="blog-card__link" href="odoo-integration-error-recovery.html">Читать материал →</a>
+          </article>
+          <article class="blog-card">
+            <p class="blog-card__eyebrow">Telegram</p>
+            <h3><a href="odoo-telegram-integration.html">Интеграция Odoo с Telegram: отчёты и операционные сценарии</a></h3>
+            <p>Сравнение сценария чтения отчётов и операционного сценария на примерах Buildflow и Atkinternal.</p>
+            <p class="blog-card__meta">Buildflow: контекст Odoo 17 Community · Atkinternal: Odoo 18 Enterprise</p>
+            <a class="blog-card__link" href="odoo-telegram-integration.html">Читать материал →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" aria-labelledby="blog-next-step-title">
+      <div class="container">
+        <h2 class="section__title" id="blog-next-step-title">От технического материала — к задаче проекта</h2>
+        <div class="section__line" aria-hidden="true"></div>
+        <div class="blog-bridges">
+          <article class="blog-bridge">
+            <h3>Нужно спроектировать обмен?</h3>
+            <p>Посмотрите, как студия определяет границы данных, ошибки и запуск интеграционного контура.</p>
+            <a href="../services/odoo-integrations.html">Услуга интеграции Odoo →</a>
+          </article>
+          <article class="blog-bridge">
+            <h3>Нужны подтверждённые примеры?</h3>
+            <p>В кейсах отдельно отмечены проекты студии и опыт Владислава Червякова во время работы в kt.team.</p>
+            <a href="../cases/">Перейти к кейсам →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__top"><div class="footer__grid">
+      <div class="footer__brand"><a href="../index.html" class="footer__logo" aria-label="Студия Владислава Червякова — главная">В<span class="logo-accent">Ч</span></a><p class="footer__tagline">Студия Владислава Червякова. Внедрение Odoo, модули, интеграции и сопровождение.</p></div>
+      <nav class="footer__col" aria-label="Навигация по сайту"><h2 class="footer__col-title">Навигация</h2><ul class="footer__links"><li><a href="../services/">Услуги</a></li><li><a href="../cases/">Кейсы</a></li><li><a href="./" aria-current="page">Блог</a></li><li><a href="../contacts.html">Контакты</a></li></ul></nav>
+      <nav class="footer__col" aria-label="Материалы"><h2 class="footer__col-title">Материалы</h2><ul class="footer__links"><li><a href="odoo-integration-architecture.html">Архитектура интеграции</a></li><li><a href="odoo-integration-error-recovery.html">Восстановление после сбоев</a></li><li><a href="odoo-telegram-integration.html">Odoo и Telegram</a></li></ul></nav>
+      <div class="footer__col"><h2 class="footer__col-title">Контакты</h2><ul class="footer__links"><li><a href="https://t.me/skbarawork" target="_blank" rel="noopener noreferrer">Telegram @skbarawork</a></li><li><a href="mailto:skbarawork@gmail.com">skbarawork@gmail.com</a></li><li><a href="tel:+79959663319">+7 995 966-33-19</a></li></ul></div>
+    </div></div>
+    <div class="footer__bottom"><div class="container footer__bottom-inner"><p class="footer__copy">© 2026 Студия Владислава Червякова. Все права защищены.</p><nav class="footer__legal" aria-label="Юридическая информация"><a href="../privacy.html">Политика конфиденциальности</a><a href="../consent.html">Согласие на обработку данных</a></nav></div></div>
+  </footer>
+
+  <div class="cookie-banner" id="cookieBanner" role="region" aria-labelledby="cookieBannerTitle" aria-describedby="cookieBannerDesc" hidden><div class="cookie-banner__inner container"><p class="cookie-banner__text" id="cookieBannerDesc"><span id="cookieBannerTitle" class="visually-hidden">Уведомление о cookie</span>Мы используем cookie для корректной работы сайта и оценки посещаемости. Продолжая использовать сайт, вы можете принять все cookie или оставить только необходимые. Подробнее в <a href="../privacy.html">политике конфиденциальности</a> и <a href="../consent.html">согласии на обработку данных</a>.</p><div class="cookie-banner__actions"><button type="button" class="btn btn--cookie-essential" id="cookieEssential">Только необходимое</button><button type="button" class="btn btn--primary" id="cookieAccept">Принять</button></div></div></div>
+  <script src="../script.js?v=20260928b"></script>
+</body>
+</html>
