@@ -340,6 +340,19 @@ main > section[id] { scroll-margin-top: 6rem; }
   clip-path: polygon(44% 0, 100% 0, 100% 170%);
   z-index: 0;
 }
+@media (min-width: 1101px) {
+  .hero::after {
+    top: calc(50% + 16.5px - 120%);
+    left: calc(50% + min(50%, 550px) - 174px);
+    right: auto;
+    bottom: auto;
+    width: 200%;
+    height: 240%;
+    clip-path: none;
+    transform: skewX(36.5deg);
+    transform-origin: 0 50%;
+  }
+}
 .hero__inner {
   position: relative;
   z-index: 1;
@@ -2165,6 +2178,7 @@ body.cookie-banner-visible { padding-bottom: var(--cookie-banner-space, 6.5rem);
   color: var(--text);
   line-height: 1.35;
 }
+.projects-cases__card-title a { color: inherit; text-decoration: none; }
 .projects-cases__card--featured .projects-cases__card-title { font-size: clamp(1.45rem, 2.3vw, 2rem); }
 .projects-cases__card-desc {
   margin: 0;

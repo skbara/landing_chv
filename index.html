@@ -32,7 +32,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=20260928a">
+  <link rel="stylesheet" href="styles.css?v=20260928b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -291,7 +291,7 @@
     <!-- Hero -->
     <section class="hero" id="hero">
       <div class="hero__inner">
-        <div class="hero__social" aria-label="Соцсети и контакты">
+        <div class="hero__social" role="group" aria-label="Соцсети и контакты">
           <a href="https://t.me/skbarawork" class="hero__social-link" target="_blank" rel="noopener" title="Telegram"><svg class="hero__social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.1.154.234.17.331.015.097.034.318.019.49z"/></svg></a>
           <a href="tel:+79959663319" class="hero__social-link" title="Телефон"><svg class="hero__social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 1H7C5.9 1 5 1.9 5 3v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg></a>
           <a href="mailto:skbarawork@gmail.com" class="hero__social-link" title="Email"><svg class="hero__social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
@@ -329,6 +329,9 @@
         <h2 class="section__title animate-on-scroll">Кейсы и проекты</h2>
         <div class="section__line" aria-hidden="true"></div>
         <p class="section__lead animate-on-scroll">Показываем проекты команды студии: внедрение ERP, интеграции и сценарии работы с Odoo через Telegram. Опыт основателя в kt.team отмечен отдельно.</p>
+        <div class="section__cta animate-on-scroll">
+          <a href="cases/" class="btn btn--outline">Все кейсы <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
         <nav class="projects-cases animate-on-scroll" id="projects-cases" aria-label="Подробные кейсы">
           <p class="projects-cases__label">Разобранные проекты</p>
           <div class="projects-cases__grid">
@@ -393,7 +396,7 @@
             <h3 class="card__title">Реестр смет и справочники Buildflow</h3>
             <p class="card__text">Центральный модуль со сметами, иерархией родитель/доп. соглашения, статусами расчёта и договора, chatter, кронами и миграциями. Реализованы справочники, области видимости пользователей и кастомный backend UX для безопасной работы ролей.</p>
             <div class="card__tags"><span>Odoo</span><span>Registry</span><span>UX</span></div>
-            <div class="card__gallery" aria-label="Скриншоты реестра смет Buildflow">
+            <div class="card__gallery" role="group" aria-label="Скриншоты реестра смет Buildflow">
               <figure class="card__shot">
                 <button type="button" class="card__shot-button" data-lightbox-src="photo/Реестр смет - 1 (реестр).png" data-lightbox-alt="Buildflow: реестр смет" aria-label="Открыть скриншот: реестр смет" data-lightbox-caption="Реестр смет: список смет с проектами, статусами, суммами и ключевыми параметрами в одном представлении.">
                   <img src="images/cases/buildflow-previews/estimates-registry.webp" alt="Buildflow: реестр смет" loading="lazy" width="960" height="540">
@@ -416,7 +419,7 @@
             <h3 class="card__title">Реестры договоров и актов Buildflow</h3>
             <p class="card__text">Связанные реестры договоров и актов с финансовыми показателями, типами документов, статусами подписания и оплаты, комплектностью и расширением карточки сметы. Согласованная модель связей между сметой, договором и актом.</p>
             <div class="card__tags"><span>Odoo</span><span>Contracts</span><span>Acts</span></div>
-            <div class="card__gallery" aria-label="Скриншоты реестров договоров и актов Buildflow">
+            <div class="card__gallery" role="group" aria-label="Скриншоты реестров договоров и актов Buildflow">
               <figure class="card__shot">
                 <button type="button" class="card__shot-button" data-lightbox-src="photo/Реестр актов - 1 (реестр).png" data-lightbox-alt="Buildflow: реестр актов" aria-label="Открыть скриншот: реестр актов" data-lightbox-caption="Реестр актов: список актов с привязкой к сметам и договорам, статусами подписания и оплаты.">
                   <img src="images/cases/buildflow-previews/acts-registry.webp" alt="Buildflow: реестр актов" loading="lazy" width="960" height="540">
@@ -444,7 +447,7 @@
             <h3 class="card__title">Дашборд реестров Buildflow</h3>
             <p class="card__text">Клиентский dashboard на spreadsheet_dashboard с JSON-дашбордом, фильтрами по периоду, подрядчику, проекту и корпусу, а также переходами к связанным записям. Реализованы динамические таблицы под графиком: они вмещают любое количество сущностей без жёстких ограничений по строкам. Данные учитывают области видимости пользователя, чтобы каждый видел только свой контур работы.</p>
             <div class="card__tags"><span>Odoo</span><span>Dashboard</span><span>Spreadsheet</span></div>
-            <div class="card__gallery card__gallery--single" aria-label="Скриншот дашборда Buildflow">
+            <div class="card__gallery card__gallery--single" role="group" aria-label="Скриншот дашборда Buildflow">
               <figure class="card__shot">
                 <button type="button" class="card__shot-button" data-lightbox-src="photo/Дашборд.png" data-lightbox-alt="Buildflow: дашборд реестров" aria-label="Открыть скриншот: дашборд реестров" data-lightbox-caption="Дашборд Buildflow: ключевые показатели и динамика с фильтрами по периоду, подрядчику, проекту и корпусу.">
                   <img src="images/cases/buildflow-previews/dashboard.webp" alt="Buildflow: дашборд реестров" loading="lazy" width="960" height="540">
@@ -540,6 +543,7 @@
         <p class="section__lead">Подключаемся к Odoo-проектам как студия: от экспресс-аудита и MVP до интеграций, техподдержки и масштабирования — с нуля или на базе уже работающей системы.</p>
         <div class="section__cta services__cta animate-on-scroll">
           <a href="contacts.html?topic=project" class="btn btn--primary">Обсудить проект <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a href="services/" class="btn btn--outline">Все услуги <span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
         <div class="services">
           <article class="service-card animate-on-scroll">
@@ -852,7 +856,7 @@
     <div class="lightbox__backdrop" data-lightbox-close></div>
     <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-label="Просмотр изображения" aria-describedby="lightboxCaption">
       <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Закрыть окно">×</button>
-      <img class="lightbox__image" id="lightboxImage" alt="">
+      <img class="lightbox__image" id="lightboxImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="">
       <p class="lightbox__caption" id="lightboxCaption"></p>
     </div>
   </div>
@@ -867,9 +871,9 @@
         <nav class="footer__col" aria-label="Навигация по сайту">
           <h3 class="footer__col-title">Навигация</h3>
           <ul class="footer__links">
-            <li><a href="#projects">Кейсы</a></li>
+            <li><a href="cases/">Кейсы</a></li>
             <li><a href="#pains">Задачи бизнеса</a></li>
-            <li><a href="#services">Услуги</a></li>
+            <li><a href="services/">Услуги</a></li>
             <li><a href="#process">Подход</a></li>
             <li><a href="#express-audit">Экспресс-аудит</a></li>
             <li><a href="#team">Команда</a></li>
@@ -924,6 +928,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260928a"></script>
+  <script src="script.js?v=20260928b"></script>
 </body>
 </html>

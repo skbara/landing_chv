@@ -7,6 +7,35 @@
   var FORM_SUBMIT_TIMEOUT_MS = 3000;
   var cookieBannerResizeObserver = null;
 
+  // Directory URLs are correct for production, where the server resolves
+  // /services/ and /cases/ to index.html. The file protocol has no such
+  // resolution, so adapt links only for direct local previews.
+  function enableLocalFileNavigation() {
+    if (window.location.protocol !== 'file:') return;
+
+    var links = document.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href || href.charAt(0) === '#' || href.indexOf('//') === 0) continue;
+
+      if (href.charAt(0) === '/') {
+        href = href.slice(1);
+        if (!href) {
+          href = 'index.html';
+        } else if (href.charAt(0) === '#') {
+          href = 'index.html' + href;
+        }
+      }
+
+      if (href === './') {
+        href = 'index.html';
+      }
+
+      href = href.replace(/(^|\/)(services|cases)\/$/, '$1$2/index.html');
+      links[i].setAttribute('href', href);
+    }
+  }
+
   function syncCookieBannerSpace(banner) {
     if (!banner || banner.hidden) return;
     document.documentElement.style.setProperty(
@@ -145,6 +174,7 @@
     }
   }
 
+  enableLocalFileNavigation();
   initCookieConsent();
 
   // Единая цель для ключевых CTA. При необходимости имя можно переопределить
