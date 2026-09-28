@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://www.vch-tech.com/images/og-cover.png">
   <meta name="twitter:image:alt" content="ВЧ — знак Студии Владислава Червякова">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="stylesheet" href="../styles.css?v=20260928c">
+  <link rel="stylesheet" href="../styles.css?v=20260928d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -135,25 +135,40 @@
         <p class="section__lead">Первый кластер посвящён границам систем, очередям, восстановлению после ошибок и двум разным способам использовать Telegram рядом с Odoo.</p>
         <div class="blog-grid">
           <article class="blog-card blog-card--featured">
-            <p class="blog-card__eyebrow">Архитектура</p>
-            <h3><a href="odoo-integration-architecture.html">Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок</a></h3>
-            <p>Как определить владельца данных, направления обмена, идентификаторы и поведение при ошибках до начала разработки API.</p>
-            <p class="blog-card__meta">Концептуальные принципы · примеры SPL и Tridoks</p>
-            <a class="blog-card__link" href="odoo-integration-architecture.html">Читать материал →</a>
+            <a class="blog-card__media" href="odoo-integration-architecture.html">
+              <img src="../images/blog/odoo-integration-architecture.png" width="1200" height="630" loading="lazy" decoding="async" alt="Схема архитектуры интеграции Odoo с очередью и связанными системами">
+            </a>
+            <div class="blog-card__content">
+              <p class="blog-card__eyebrow">Архитектура</p>
+              <h3><a href="odoo-integration-architecture.html">Архитектура интеграции Odoo: данные, очереди и восстановление после ошибок</a></h3>
+              <p>Как определить владельца данных, направления обмена, идентификаторы и поведение при ошибках до начала разработки API.</p>
+              <p class="blog-card__meta">Концептуальные принципы · примеры SPL и Tridoks</p>
+              <a class="blog-card__link" href="odoo-integration-architecture.html">Читать материал →</a>
+            </div>
           </article>
           <article class="blog-card">
-            <p class="blog-card__eyebrow">Эксплуатация</p>
-            <h3><a href="odoo-integration-error-recovery.html">Как восстанавливать интеграцию Odoo после сбоев</a></h3>
-            <p>Классификация сбоев, безопасный retry, replay и reconciliation, а также два обезличенных сбоя queue_job/XML-RPC.</p>
-            <p class="blog-card__meta">Концептуальный разбор · проектный пример SPL</p>
-            <a class="blog-card__link" href="odoo-integration-error-recovery.html">Читать материал →</a>
+            <a class="blog-card__media" href="odoo-integration-error-recovery.html">
+              <img src="../images/blog/odoo-integration-error-recovery.png" width="1200" height="630" loading="lazy" decoding="async" alt="Схема обнаружения и восстановления интеграции Odoo после сбоя">
+            </a>
+            <div class="blog-card__content">
+              <p class="blog-card__eyebrow">Эксплуатация</p>
+              <h3><a href="odoo-integration-error-recovery.html">Как восстанавливать интеграцию Odoo после сбоев</a></h3>
+              <p>Классификация сбоев, безопасный retry, replay и reconciliation, а также два обезличенных сбоя queue_job/XML-RPC.</p>
+              <p class="blog-card__meta">Концептуальный разбор · проектный пример SPL</p>
+              <a class="blog-card__link" href="odoo-integration-error-recovery.html">Читать материал →</a>
+            </div>
           </article>
           <article class="blog-card">
-            <p class="blog-card__eyebrow">Telegram</p>
-            <h3><a href="odoo-telegram-integration.html">Интеграция Odoo с Telegram: отчёты и операционные сценарии</a></h3>
-            <p>Сравнение сценария чтения отчётов и операционного сценария на примерах Buildflow и Atkinternal.</p>
-            <p class="blog-card__meta">Buildflow: контекст Odoo 17 Community · Atkinternal: Odoo 18 Enterprise</p>
-            <a class="blog-card__link" href="odoo-telegram-integration.html">Читать материал →</a>
+            <a class="blog-card__media" href="odoo-telegram-integration.html">
+              <img src="../images/blog/odoo-telegram-integration.png" width="1200" height="630" loading="lazy" decoding="async" alt="Схема интеграции Odoo с Telegram для отчётов и операционных действий">
+            </a>
+            <div class="blog-card__content">
+              <p class="blog-card__eyebrow">Telegram</p>
+              <h3><a href="odoo-telegram-integration.html">Интеграция Odoo с Telegram: отчёты и операционные сценарии</a></h3>
+              <p>Сравнение сценария чтения отчётов и операционного сценария на примерах Buildflow и Atkinternal.</p>
+              <p class="blog-card__meta">Buildflow: контекст Odoo 17 Community · Atkinternal: Odoo 18 Enterprise</p>
+              <a class="blog-card__link" href="odoo-telegram-integration.html">Читать материал →</a>
+            </div>
           </article>
         </div>
       </div>
