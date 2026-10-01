@@ -1,13 +1,7 @@
 name: Post-deploy IndexNow
 
 on:
-  workflow_run:
-    workflows:
-      - pages build and deployment
-    types:
-      - completed
-    branches:
-      - main
+  deployment_status:
   workflow_dispatch:
     inputs:
       mode:
@@ -31,7 +25,10 @@ jobs:
   notify-indexnow:
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      (github.event_name == 'deployment_status' &&
+       github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'github-pages' &&
+       github.event.deployment.ref == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
@@ -44,20 +41,20 @@ jobs:
       - name: Check out the deployed source commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || 'main' }}
+          ref: ${{ github.event_name == 'deployment_status' && github.event.deployment.sha || 'main' }}
           fetch-depth: 0
 
       - name: Run IndexNow unit tests
         run: python3 -m unittest discover -s tests -v
 
       - name: Notify IndexNow after successful production deployment
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'deployment_status'
         run: >-
           python3 scripts/indexnow.py
-          --github-event workflow_run
+          --github-event deployment_status
           --mode submit
-          --current-sha "${{ github.event.workflow_run.head_sha }}"
-          --deployment-run-id "${{ github.event.workflow_run.id }}"
+          --current-sha "${{ github.event.deployment.sha }}"
+          --deployment-id "${{ github.event.deployment.id }}"
           --site-root "$INDEXNOW_SITE_ROOT"
           --key-file "$INDEXNOW_KEY_FILE"
 

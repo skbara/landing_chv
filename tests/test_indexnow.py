@@ -125,7 +125,7 @@ class IndexNowSelectionTests(unittest.TestCase):
             indexnow, "_has_successful_automatic_indexnow_run", return_value=True
         ):
             context = indexnow.resolve_deployment_context(
-                "workflow_run", "current", 20
+                "deployment_status", "current", 200
             )
         self.assertEqual(context.previous_sha, "previous")
         self.assertFalse(context.baseline)
@@ -145,7 +145,7 @@ class IndexNowSelectionTests(unittest.TestCase):
             indexnow, "_has_successful_automatic_indexnow_run", return_value=False
         ):
             context = indexnow.resolve_deployment_context(
-                "workflow_run", "current", 20
+                "deployment_status", "current", 200
             )
         self.assertTrue(context.baseline)
 

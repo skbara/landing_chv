@@ -272,7 +272,7 @@ def sitemap_at_commit(sha: str) -> set[str]:
 class DeploymentContext:
     current_sha: str
     previous_sha: str | None
-    deployment_run_id: int | None
+    deployment_id: int | None
     baseline: bool
 
 
@@ -321,7 +321,7 @@ def _has_successful_automatic_indexnow_run() -> bool:
         f"/actions/workflows/{INDEXNOW_WORKFLOW_FILE}/runs",
         {
             "branch": "main",
-            "event": "workflow_run",
+            "event": "deployment_status",
             "status": "success",
             "per_page": 10,
         },
@@ -333,34 +333,28 @@ def _has_successful_automatic_indexnow_run() -> bool:
 def resolve_deployment_context(
     github_event: str,
     current_sha: str | None,
-    deployment_run_id: int | None,
+    deployment_id: int | None,
 ) -> DeploymentContext:
     runs = _successful_pages_runs()
-    if github_event == "workflow_run":
-        if not current_sha or not deployment_run_id:
-            raise RuntimeError("workflow_run requires current SHA and deployment run ID")
+    if github_event == "deployment_status":
+        if not current_sha or not deployment_id:
+            raise RuntimeError("deployment_status requires current SHA and deployment ID")
         baseline = not _has_successful_automatic_indexnow_run()
         previous_sha: str | None = None
         found_current = False
         for run in runs:
-            run_id = int(run.get("id", 0))
             sha = str(run.get("head_sha", ""))
-            if run_id == deployment_run_id:
+            if sha == current_sha:
                 found_current = True
                 continue
             if found_current and sha and sha != current_sha:
                 previous_sha = sha
                 break
         if not found_current:
-            current_run = _github_json(f"/actions/runs/{deployment_run_id}")
-            assert isinstance(current_run, dict)
-            current_created = str(current_run.get("created_at", ""))
-            for run in runs:
-                sha = str(run.get("head_sha", ""))
-                if str(run.get("created_at", "")) < current_created and sha != current_sha:
-                    previous_sha = sha
-                    break
-        return DeploymentContext(current_sha, previous_sha, deployment_run_id, baseline)
+            raise RuntimeError(
+                f"No successful Pages workflow run found for deployment SHA {current_sha}"
+            )
+        return DeploymentContext(current_sha, previous_sha, deployment_id, baseline)
 
     distinct: list[dict[str, object]] = []
     seen: set[str] = set()
@@ -376,7 +370,7 @@ def resolve_deployment_context(
     return DeploymentContext(
         str(latest["head_sha"]),
         str(previous["head_sha"]) if previous else None,
-        int(latest["id"]),
+        None,
         previous is None,
     )
 
@@ -642,13 +636,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--github-event",
-        choices=("workflow_run", "workflow_dispatch", "local"),
+        choices=("deployment_status", "workflow_dispatch", "local"),
         default="local",
     )
     parser.add_argument("--mode", choices=("dry-run", "submit"), default="dry-run")
     parser.add_argument("--current-sha")
     parser.add_argument("--base-sha")
-    parser.add_argument("--deployment-run-id", type=int)
+    parser.add_argument("--deployment-id", type=int)
     parser.add_argument("--site-root", default=DEFAULT_SITE_ROOT)
     parser.add_argument("--key-file", required=True)
     parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT)
@@ -666,9 +660,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     key, key_filename = _read_key(Path(args.key_file))
 
-    if args.github_event in {"workflow_run", "workflow_dispatch"}:
+    if args.github_event in {"deployment_status", "workflow_dispatch"}:
         context = resolve_deployment_context(
-            args.github_event, args.current_sha, args.deployment_run_id
+            args.github_event, args.current_sha, args.deployment_id
         )
     else:
         if not args.current_sha:
@@ -676,14 +670,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         context = DeploymentContext(
             args.current_sha,
             args.base_sha,
-            args.deployment_run_id,
+            args.deployment_id,
             args.baseline or not args.base_sha,
         )
 
     print(
         f"Deployment SHA: {context.current_sha}\n"
         f"Previous deployment SHA: {context.previous_sha or '<none>'}\n"
-        f"Deployment run ID: {context.deployment_run_id or '<local>'}\n"
+        f"Deployment ID: {context.deployment_id or '<local>'}\n"
         f"Mode: {args.mode}"
     )
 
