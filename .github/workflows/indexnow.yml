@@ -1,0 +1,71 @@
+name: Post-deploy IndexNow
+
+on:
+  workflow_run:
+    workflows:
+      - pages build and deployment
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Dry-run by default; choose submit only for an intentional live submission.
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - submit
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: indexnow-production
+  cancel-in-progress: false
+
+jobs:
+  notify-indexnow:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      INDEXNOW_KEY_FILE: 594044967eb2c43b5535431f3c556a7ab4d84389402f3e2245d0f184ce89bff1.txt
+      INDEXNOW_SITE_ROOT: https://www.vch-tech.com
+      GITHUB_TOKEN: ${{ github.token }}
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    steps:
+      - name: Check out the deployed source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || 'main' }}
+          fetch-depth: 0
+
+      - name: Run IndexNow unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Notify IndexNow after successful production deployment
+        if: github.event_name == 'workflow_run'
+        run: >-
+          python3 scripts/indexnow.py
+          --github-event workflow_run
+          --mode submit
+          --current-sha "${{ github.event.workflow_run.head_sha }}"
+          --deployment-run-id "${{ github.event.workflow_run.id }}"
+          --site-root "$INDEXNOW_SITE_ROOT"
+          --key-file "$INDEXNOW_KEY_FILE"
+
+      - name: Run safe manual IndexNow check
+        if: github.event_name == 'workflow_dispatch'
+        run: >-
+          python3 scripts/indexnow.py
+          --github-event workflow_dispatch
+          --mode "${{ inputs.mode }}"
+          --site-root "$INDEXNOW_SITE_ROOT"
+          --key-file "$INDEXNOW_KEY_FILE"
